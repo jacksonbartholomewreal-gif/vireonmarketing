@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poppin' Parties | Event Planner in Greensburg, PA</title>
+  <meta name="description" content="Poppin' Parties — your one stop shop for balloon arches, slumber parties, themed setups & more in Greensburg, PA. Reinventing celebrations! 🎉">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --pink: #ff4d9e;
+      --purple: #9b5de5;
+      --teal: #00c9c8;
+      --yellow: #ffe347;
+      --dark: #1a0a2e;
+      --light: #fff9fe;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(26,10,46,0.95);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-size: 20px;
+      font-weight: 900;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--pink); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--pink); }
+    .nav-cta {
+      background: var(--pink);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-weight: 700 !important;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(26,10,46,0.98);
+      padding: 20px;
+      z-index: 998;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a0a2e 0%, #2d1060 50%, #1a0a2e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(255,77,158,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 30%, rgba(0,201,200,0.12) 0%, transparent 60%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,77,158,0.2);
+      border: 1px solid rgba(255,77,158,0.5);
+      color: var(--pink);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(38px, 8vw, 72px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(90deg, var(--pink), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: clamp(16px, 3vw, 20px);
+      color: rgba(255,255,255,0.75);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), #d63384);
+      color: #fff;
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 8px 30px rgba(255,77,158,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,77,158,0.5); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.2); }
+    .floating-emojis {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .floating-emojis span {
+      position: absolute;
+      font-size: clamp(20px, 3vw, 36px);
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.6;
+    }
+    .floating-emojis span:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+    .floating-emojis span:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
+    .floating-emojis span:nth-child(3) { bottom: 25%; left: 6%; animation-delay: 2s; }
+    .floating-emojis span:nth-child(4) { bottom: 20%; right: 8%; animation-delay: 1.5s; }
+    .floating-emojis span:nth-child(5) { top: 40%; left: 3%; animation-delay: 3s; }
+    .floating-emojis span:nth-child(6) { top: 35%; right: 3%; animation-delay: 0.5s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+
+    /* SECTION BASE */
+    section { padding: 80px 20px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: #666;
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    /* SERVICES */
+    .services { background: #fff; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 32px 28px;
+      border: 2px solid transparent;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 20px 20px 0 0;
+    }
+    .service-card.pink::before { background: var(--pink); }
+    .service-card.purple::before { background: var(--purple); }
+    .service-card.teal::before { background: var(--teal); }
+    .service-card.yellow::before { background: var(--yellow); }
+    .service-card:hover {
+      border-color: var(--pink);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(255,77,158,0.12);
+    }
+    .service-icon { font-size: 40px; margin-bottom: 16px; }
+    .service-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .service-card p {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* GALLERY */
+    .gallery { background: var(--dark); }
+    .gallery .section-title { color: #fff; }
+    .gallery .section-sub { color: rgba(255,255,255,0.6); }
+    .gallery .section-label { color: var(--teal); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .gallery-item {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+      display: block;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,10,46,0.7) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* WHY US */
+    .why { background: linear-gradient(135deg, #fff9fe, #fce4f3); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 28px;
+    }
+    .why-card {
+      text-align: center;
+      padding: 32px 20px;
+    }
+    .why-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px;
+      margin: 0 auto 20px;
+      box-shadow: 0 8px 24px rgba(255,77,158,0.3);
+    }
+    .why-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .why-card p {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials { background: #fff; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 28px;
+      border: 1px solid #f0e0f0;
+    }
+    .stars { font-size: 18px; margin-bottom: 14px; }
+    .testimonial-card p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .reviewer-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .reviewer-name { font-weight: 700; color: var(--dark); font-size: 15px; }
+    .reviewer-tag { font-size: 13px; color: #999; }
+
+    /* CONTACT */
+    .contact {
+      background: linear-gradient(135deg, #1a0a2e 0%, #2d1060 100%);
+      text-align: center;
+    }
+    .contact .section-title { color: #fff; }
+    .contact .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto 40px; }
+    .contact .section-label { color: var(--teal); }
+    .contact-cards {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .contact-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 24px 32px;
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      min-width: 180px;
+    }
+    .contact-card:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-4px);
+    }
+    .contact-card .cc-icon { font-size: 28px; margin-bottom: 10px; }
+    .contact-card .cc-label { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+    .contact-card .cc-value { font-size: 15px; font-weight: 700; }
+
+    .contact-form {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .contact-form h3 {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 700; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+      width: 100%;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.35); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--pink); }
+    .form-group select option { background: #2d1060; color: #fff; }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--pink), #d63384);
+      color: #fff;
+      border: none;
+      padding: 16px;
+      border-radius: 50px;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 30px rgba(255,77,158,0.35);
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,77,158,0.5); }
+
+    /* FOOTER */
+    footer {
+      background: #0d0520;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 14px;
+    }
+    footer strong { color: var(--pink); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 28px 20px; }
+      section { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>Poppin'</span> Parties 🎈</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#contact" onclick="toggleMenu()" style="color:var(--pink);">📅 Book Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="floating-emojis">
+    <span>🎈</span><span>🎉</span><span>✨</span><span>🎊</span><span>🎀</span><span>🪄</span>
+  </div>
+  <div style="position:relative;z-index:1;">
+    <div class="hero-badge">📍 Greensburg, PA</div>
+    <h1>Reinventing<br><span class="highlight">Celebrations</span> 🎉</h1>
+    <p>Your one stop shop for balloon arches, slumber parties, themed setups & custom event experiences. We make your vision come to life.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">🎈 Book Your Event</a>
+      <a href="#gallery" class="btn-secondary">See Our Work →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">Everything You Need<br>for the Perfect Party</h2>
+    <p class="section-sub">From balloon installations to full slumber party setups — we handle every detail so you don't have to.</p>
+    <div class="services-grid">
+      <div class="service-card pink">
+        <div class="service-icon">🎈</div>
+        <h3>Balloon Arches & Garlands</h3>
+        <p>Custom balloon arches, organic garlands, and column displays in any color palette. Perfect for birthdays, graduations, and more.</p>
+      </div>
+      <div class="service-card purple">
+        <div class="service-icon">🛏️</div>
+        <h3>Slumber Party Setups</h3>
+        <p>Luxurious themed slumber party setups complete with tents, mattresses, linens, and personalized decor for an unforgettable night.</p>
+      </div>
+      <div class="service-card teal">
+        <div class="service-icon">🎨</div>
+        <h3>Themed Event Decor</h3>
+        <p>Full event styling for any theme — Taylor Swift, Mermaid, Tropical, Sports, and more. We transform any space into something magical.</p>
+      </div>
+      <div class="service-card yellow">
+        <div class="service-icon">🎊</div>
+        <h3>Milestone Celebrations</h3>
+        <p>Sweet 16s, quinceañeras, baby showers, graduations — we specialize in making milestone moments truly memorable.</p>
+      </div>
+      <div class="service-card pink">
+        <div class="service-icon">📸</div>
+        <h3>Photo Backdrops</h3>
+        <p>Stunning photo booth setups and backdrops featuring balloon walls, marquee letters, and custom signage for the perfect shot.</p>
+      </div>
+      <div class="service-card purple">
+        <div class="service-icon">✨</div>
+        <h3>Full Event Packages</h3>
+        <p>Let us handle everything from start to finish. We set up, style, and break down — you just show up and enjoy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-label">Our Work</div>
+    <h2 class="section-title">Real Events. Real Magic.</h2>
+    <p class="section-sub">Every setup is custom-designed just for you. Take a look at some of our recent celebrations.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&auto=format&fit=crop" alt="Balloon arch display" loading="lazy">
+        <div class="gallery-overlay"><span>🎈 Balloon Arch</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&auto=format&fit=crop" alt="Party setup" loading="lazy">
+        <div class="gallery-overlay"><span>🎉 Birthday Setup</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1543269664-647163e36bee?w=600&auto=format&fit=crop" alt="Slumber party" loading="lazy">
+        <div class="gallery-overlay"><span>🛏️ Slumber Party</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&auto=format&fit=crop" alt="Event decorations" loading="lazy">
+        <div class="gallery-overlay"><span>✨ Sweet 16</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&auto=format&fit=crop" alt="Colorful balloons" loading="lazy">
+        <div class="gallery-overlay"><span>🎊 Graduation Party</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop" alt="Themed event" loading="lazy">
+        <div class="gallery-overlay"><span>🎀 Custom Theme</span></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:36px;">
+      <a href="https://www.instagram.com/poppin_parties23" target="_blank" class="btn-primary">📸 See More on Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="about">
+  <div class="container">
+    <div class="section-label">Why Choose Us</div>
+    <h2 class="section-title">We Go Above & Beyond<br>Every Single Time</h2>
+    <p class="section-sub">We're not just decorators — we're celebration specialists. Here's what makes Poppin' Parties different.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🎨</div>
+        <h3>100% Custom Designs</h3>
+        <p>Every event is uniquely designed around your vision, theme, and color palette. No cookie-cutter setups here.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h3>Stress-Free Setup</h3>
+        <p>We handle all the heavy lifting — setup, styling, and breakdown. You show up and enjoy your celebration.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💕</div>
+        <h3>Detail-Obsessed</h3>
+        <p>From the ribbon color to the balloon placement, every detail matters to us. Your event will be Instagram-worthy.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📍</div>
+        <h3>Local & Trusted</h3>
+        <p>Based in Greensburg, PA — serving the local community with love since day one. Real people, real results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-label">Reviews</div>
+    <h2 class="section-title">What Our Clients Say</h2>
+    <p class="section-sub">Don't just take our word for it — hear from the families we've celebrated with.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>"Poppin' Parties absolutely nailed my daughter's slumber party! Every detail was perfect and the girls were obsessed. Will 100% book again!"</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">S</div>
+          <div>
+            <div class="reviewer-name">Sarah M.</div>
+            <div class="reviewer-tag">Slumber Party · Greensburg, PA</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>"The balloon arch for my son's graduation party was STUNNING. So many guests asked where I got it. Quick to respond, easy to work with, and so talented!"</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">J</div>
+          <div>
+            <div class="reviewer-name">Jennifer R.</div>
+            <div class="reviewer-tag">Graduation Party · Greensburg, PA</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>"Hired them for my Sweet 16 and the setup was beyond anything I imagined. The Taylor Swift theme was executed PERFECTLY. Highly recommend!!"</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">A</div>
+          <div>
+            <div class="reviewer-name">Alexis T.</div>
+            <div class="reviewer-tag">Sweet 16 · Greensburg, PA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's Plan Your Event! 🎉</h2>
+    <p class="section-sub">Fill out the form below or reach out directly. We'd love to make your celebration unforgettable.</p>
+    <div class="contact-cards">
+      <a href="https://www.instagram.com/poppin_parties23" target="_blank" class="contact-card">
+        <div class="cc-icon">📸</div>
+        <div class="cc-label">Instagram</div>
+        <div class="cc-value">@poppin_parties23</div>
+      </a>
+      <a href="mailto:poppinparties23@gmail.com" class="contact-card">
+        <div class="cc-icon">📧</div>
+        <div class="cc-label">Email</div>
+        <div class="cc-value">poppinparties23@gmail.com</div>
+      </a>
+      <div class="contact-card">
+        <div class="cc-icon">📍</div>
+        <div class="cc-label">Location</div>
+        <div class="cc-value">Greensburg, PA</div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Request a Quote 🎈</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Jane Smith">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="(724) 555-0000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@email.com">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Event Type</label>
+          <select>
+            <option value="">Select event type</option>
+            <option>Birthday Party</option>
+            <option>Sweet 16</option>
+            <option>Slumber Party</option>
+            <option>Graduation Party</option>
+            <option>Baby Shower</option>
+            <option>Quinceañera</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Event Date</label>
+          <input type="date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tell Us About Your Event</label>
+        <textarea placeholder="Theme, colors, number of guests, any special requests..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Send My Request 🎉</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <strong>Poppin' Parties</strong> · Greensburg, PA · Reinventing Celebrations 🎈</p>
+  <p style="margin-top:8px;"><a href="https://www.instagram.com/poppin_parties23" target="_blank" style="color:var(--pink);text-decoration:none;">@poppin_parties23</a></p>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+
+  // Close mobile menu on outside click
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.querySelector('.hamburger');
+    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  function submitForm() {
+    alert("Thanks! We'll be in touch soon to discuss your event 🎉");
+  }
+</script>
+
+</body>
+</html>
