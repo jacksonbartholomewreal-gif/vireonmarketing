@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smokin' & Cerv'n — Real Smoke. Real Flavor.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Oswald:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --fire: #FF4500;
+    --ember: #FF6B00;
+    --gold: #FFB800;
+    --smoke: #1a1a1a;
+    --charcoal: #111111;
+    --ash: #1e1e1e;
+    --cream: #FFF8F0;
+    --red: #C0392B;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Lato', sans-serif; background: var(--charcoal); color: var(--cream); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(8,8,8,0.97); backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--fire);
+    padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 72px;
+  }
+  .nav-logo { font-family: 'Oswald', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; text-decoration: none; }
+  .nav-logo span { color: var(--fire); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--cream); text-decoration: none; font-family: 'Oswald', sans-serif; font-size: 0.88rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { background: var(--fire) !important; color: #fff !important; padding: 9px 22px !important; border-radius: 4px; }
+  .nav-cta:hover { background: var(--ember) !important; }
+  .hero-badge { display: inline-block; border: 2px solid var(--gold); color: var(--gold); font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 4px; text-transform: uppercase; padding: 6px 20px; border-radius: 2px; margin-bottom: 22px; }
+  .hero h1 { font-family: 'Oswald', sans-serif; font-size: clamp(3.5rem,10vw,8rem); font-weight: 700; line-height: 1; color: #fff; text-transform: uppercase; text-shadow: 0 4px 30px rgba(0,0,0,0.8); margin-bottom: 8px; }
+  .fire-text { color: var(--fire); -webkit-text-stroke: 1px var(--ember); }
+  .hero-sub { font-family: 'Oswald', sans-serif; font-size: clamp(0.9rem,2.5vw,1.4rem); letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 26px; height: 2px; background: var(--cream); border-radius: 2px; transition: 0.3s; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.85) 100%),
+      url('https://images.pexels.com/photos/1251208/pexels-photo-1251208.jpeg?auto=compress&cs=tinysrgb&w=1800') center/cover no-repeat;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 130px 20px 80px; position: relative;
+  }
+  .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 140px; background: linear-gradient(to bottom, transparent, var(--charcoal)); pointer-events: none; }
+  .hero-logo { width: min(280px, 65vw); margin-bottom: 28px; filter: drop-shadow(0 8px 40px rgba(255,69,0,0.5)); position: relative; z-index: 1; }
+  .hero-tagline { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1rem, 2.5vw, 1.35rem); color: rgba(255,255,255,0.75); margin-bottom: 36px; position: relative; z-index: 1; }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+  .btn-primary { background: var(--fire); color: #fff; padding: 16px 36px; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s; display: inline-block; box-shadow: 0 4px 20px rgba(255,69,0,0.4); }
+  .btn-primary:hover { background: var(--ember); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,69,0,0.5); }
+  .btn-outline { background: transparent; color: #fff; padding: 16px 36px; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: 2px solid rgba(255,255,255,0.4); transition: all 0.3s; display: inline-block; }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  /* SECTION HEADER */
+  .section-header { text-align: center; padding: 80px 20px 48px; }
+  .section-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 5px; text-transform: uppercase; color: var(--fire); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+  .section-label::before, .section-label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--fire); }
+  .section-title { font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; text-transform: uppercase; color: #fff; line-height: 1.1; }
+  .section-title span { color: var(--gold); }
+  .section-divider { width: 55px; height: 3px; background: linear-gradient(to right, var(--fire), var(--gold)); margin: 18px auto 0; border-radius: 2px; }
+
+  /* STATS */
+  .about-strip { background: var(--ash); border-top: 1px solid rgba(255,107,0,0.2); border-bottom: 1px solid rgba(255,107,0,0.2); padding: 52px 5%; }
+  .about-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; text-align: center; }
+  .about-stat { padding: 20px 10px; border-right: 1px solid rgba(255,107,0,0.15); }
+  .about-stat:last-child { border-right: none; }
+  .about-stat-num { font-family: 'Oswald', sans-serif; font-size: 2.8rem; font-weight: 700; color: var(--fire); line-height: 1; margin-bottom: 6px; }
+  .about-stat-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+  /* MENU */
+  .menu-section { background: var(--charcoal); padding: 0 5% 80px; }
+  .menu-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .menu-card { background: var(--ash); border: 1px solid rgba(255,107,0,0.12); border-radius: 8px; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
+  .menu-card:hover { transform: translateY(-4px); border-color: rgba(255,107,0,0.35); }
+  .menu-card-header { background: linear-gradient(135deg, rgba(255,69,0,0.18), rgba(255,107,0,0.08)); border-bottom: 1px solid rgba(255,107,0,0.15); padding: 18px 22px; display: flex; align-items: center; gap: 10px; }
+  .menu-card-icon { font-size: 1.6rem; }
+  .menu-card-title { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); }
+  .menu-card-body { padding: 20px 22px; }
+  .menu-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .menu-item:last-child { border-bottom: none; }
+  .menu-item-name { font-size: 0.93rem; color: rgba(255,248,240,0.88); }
+  .menu-item-name small { display: block; color: rgba(255,255,255,0.38); font-size: 0.75rem; margin-top: 2px; }
+  .menu-item-price { font-family: 'Oswald', sans-serif; font-weight: 600; color: var(--fire); font-size: 0.98rem; white-space: nowrap; margin-left: 12px; }
+  .menu-note { margin-top: 14px; padding: 10px 12px; background: rgba(255,184,0,0.05); border-left: 3px solid var(--gold); border-radius: 0 4px 4px 0; font-size: 0.8rem; color: rgba(255,255,255,0.48); font-style: italic; }
+
+  /* CATERING */
+  .catering-section { background: linear-gradient(180deg, #0c0c0c 0%, #1a0800 50%, #0c0c0c 100%); padding: 0 5% 80px; }
+  .packages-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .package-card { background: var(--ash); border: 1px solid rgba(255,107,0,0.18); border-radius: 10px; overflow: hidden; position: relative; transition: transform 0.3s, box-shadow 0.3s; }
+  .package-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(255,69,0,0.18); }
+  .package-card.featured { border-color: var(--gold); box-shadow: 0 0 28px rgba(255,184,0,0.12); }
+  .package-badge { position: absolute; top: 14px; right: 14px; background: var(--gold); color: var(--charcoal); font-family: 'Oswald', sans-serif; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; font-weight: 700; }
+  .package-header { background: linear-gradient(135deg, var(--fire), var(--red)); padding: 26px 20px; text-align: center; }
+  .package-size { font-family: 'Oswald', sans-serif; font-size: 2.6rem; font-weight: 700; color: #fff; line-height: 1; }
+  .package-size-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-top: 4px; }
+  .package-price { font-family: 'Oswald', sans-serif; font-size: 1.9rem; font-weight: 700; color: var(--gold); margin-top: 8px; }
+  .package-body { padding: 22px 18px; }
+  .package-includes { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 14px; text-align: center; }
+  .package-items { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pkg-item { text-align: center; padding: 10px 6px; background: rgba(255,107,0,0.07); border: 1px solid rgba(255,107,0,0.1); border-radius: 6px; }
+  .pkg-item-qty { font-family: 'Oswald', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--fire); line-height: 1; }
+  .pkg-item-label { font-size: 0.67rem; color: rgba(255,255,255,0.55); margin-top: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .pkg-note { text-align: center; margin-top: 14px; font-size: 0.78rem; color: rgba(255,255,255,0.38); font-style: italic; }
+  .package-footer { padding: 14px 18px; border-top: 1px solid rgba(255,107,0,0.1); }
+  .extra-meat-banner { max-width: 1100px; margin: 28px auto 0; background: linear-gradient(135deg, rgba(255,69,0,0.12), rgba(255,107,0,0.07)); border: 1px solid rgba(255,107,0,0.28); border-radius: 8px; padding: 18px 28px; display: flex; align-items: center; justify-content: center; gap: 16px; text-align: center; flex-wrap: wrap; }
+  .extra-meat-banner span { font-family: 'Oswald', sans-serif; font-size: 0.95rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.75); }
+  .extra-meat-banner strong { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: var(--gold); }
+
+  /* SANDWICHES */
+  .sandwiches-section { background: var(--charcoal); padding: 0 5% 80px; }
+  .sandwich-grid { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+  .sandwich-card { background: var(--ash); border: 1px solid rgba(255,107,0,0.12); border-radius: 8px; padding: 22px 20px; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.3s, transform 0.3s; }
+  .sandwich-card:hover { border-color: var(--fire); transform: translateY(-3px); }
+  .sandwich-name { font-family: 'Oswald', sans-serif; font-size: 1.05rem; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
+  .sandwich-note { font-size: 0.76rem; color: rgba(255,255,255,0.38); margin-top: 3px; }
+  .sandwich-price { font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--fire); }
+  .chips-badge { max-width: 860px; margin: 14px auto 0; background: rgba(255,184,0,0.07); border: 1px solid rgba(255,184,0,0.18); border-radius: 6px; padding: 11px 22px; text-align: center; font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+
+  /* EXTRAS */
+  .extras-section { background: var(--ash); border-top: 1px solid rgba(255,107,0,0.1); border-bottom: 1px solid rgba(255,107,0,0.1); padding: 0 5% 80px; }
+  .extras-grid { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .extra-card { background: var(--charcoal); border: 1px solid rgba(255,107,0,0.12); border-radius: 8px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.3s; }
+  .extra-card:hover { border-color: var(--fire); }
+  .extra-name { font-size: 0.92rem; color: rgba(255,248,240,0.82); }
+  .extra-name small { display: block; font-size: 0.73rem; color: rgba(255,255,255,0.35); margin-top: 2px; }
+  .extra-price { font-family: 'Oswald', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--fire); }
+
+  /* INFO */
+  .info-section { background: linear-gradient(135deg, #1a0800, #0d0d0d, #1a0800); padding: 0 5% 80px; }
+  .info-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .info-card { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,107,0,0.13); border-radius: 8px; padding: 26px 22px; text-align: center; }
+  .info-icon { font-size: 2rem; margin-bottom: 14px; }
+  .info-title { font-family: 'Oswald', sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .info-text { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* EVENTS */
+  .events-section { background: var(--charcoal); padding: 0 5% 80px; }
+  .events-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+  .event-pill { background: var(--ash); border: 1px solid rgba(255,107,0,0.18); border-radius: 50px; padding: 13px 16px; text-align: center; font-family: 'Oswald', sans-serif; font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.65); transition: all 0.3s; cursor: default; }
+  .event-pill:hover { border-color: var(--fire); color: var(--fire); background: rgba(255,69,0,0.07); }
+
+  /* ORDER SECTION */
+  .order-section { background: var(--charcoal); padding: 0 5% 80px; }
+  .order-form-wrap { max-width: 760px; margin: 0 auto; }
+  .form-card { background: var(--ash); border: 1px solid rgba(255,107,0,0.15); border-radius: 10px; padding: 28px 28px; margin-bottom: 20px; }
+  .form-card-title { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .form-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-label { display: block; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 6px; margin-top: 14px; }
+  .form-label:first-child { margin-top: 0; }
+  .form-input, .form-select, .form-textarea {
+    width: 100%; background: #141414; border: 1px solid rgba(255,107,0,0.18);
+    border-radius: 6px; padding: 12px 14px; color: var(--cream); font-size: 0.95rem;
+    outline: none; transition: border-color 0.2s; font-family: 'Lato', sans-serif;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--fire); }
+  .form-textarea { resize: vertical; min-height: 90px; }
+  .form-select option { background: #1a1a1a; }
+  .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+  .check-item { display: flex; align-items: center; gap: 10px; padding: 10px 13px; border-radius: 6px; cursor: pointer; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); transition: all 0.2s; user-select: none; }
+  .check-item.checked { background: rgba(255,69,0,0.13); border-color: var(--fire); }
+  .check-box { width: 17px; height: 17px; border-radius: 4px; background: transparent; border: 2px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+  .check-item.checked .check-box { background: var(--fire); border-color: var(--fire); }
+  .check-label { font-size: 0.86rem; color: rgba(255,248,240,0.78); }
+  .pkg-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 6px; }
+  .pkg-select-card { padding: 16px; border-radius: 8px; cursor: pointer; text-align: center; background: rgba(255,255,255,0.025); border: 2px solid rgba(255,255,255,0.07); transition: all 0.2s; }
+  .pkg-select-card.selected { background: rgba(255,69,0,0.15); border-color: var(--fire); }
+  .pkg-select-name { font-weight: 700; font-size: 0.92rem; color: #fff; margin-bottom: 4px; }
+  .pkg-select-price { font-family: 'Oswald', sans-serif; font-size: 1.3rem; font-weight: 900; color: var(--fire); }
+  .pkg-select-desc { font-size: 0.7rem; color: rgba(255,255,255,0.38); margin-top: 4px; }
+  .sand-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .sand-row:last-child { border-bottom: none; }
+  .sand-name { font-size: 0.92rem; color: rgba(255,248,240,0.82); }
+  .sand-price { font-size: 0.82rem; color: var(--fire); margin-left: 8px; }
+  .qty-box { display: flex; align-items: center; gap: 10px; }
+  .qty-btn { width: 30px; height: 30px; border-radius: 6px; background: rgba(255,69,0,0.18); border: 1px solid rgba(255,69,0,0.28); color: #fff; cursor: pointer; font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .qty-btn:hover { background: rgba(255,69,0,0.35); }
+  .qty-num { font-weight: 700; font-size: 1rem; min-width: 20px; text-align: center; color: #fff; }
+  .summary-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.88rem; color: rgba(255,255,255,0.6); gap: 12px; }
+  .summary-row span:last-child { color: #fff; text-align: right; max-width: 60%; }
+  .summary-total { display: flex; justify-content: space-between; padding: 14px 0 0; font-weight: 900; font-size: 1.25rem; }
+  .step-bar { display: flex; margin-bottom: 36px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,107,0,0.15); }
+  .step-item { flex: 1; padding: 12px 8px; display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(255,255,255,0.02); border-right: 1px solid rgba(255,107,0,0.1); transition: background 0.3s; }
+  .step-item:last-child { border-right: none; }
+  .step-item.active { background: rgba(255,69,0,0.18); border-bottom: 2px solid var(--fire); }
+  .step-item.done { background: rgba(255,69,0,0.08); }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; flex-shrink: 0; }
+  .step-item.active .step-num { background: var(--fire); color: #fff; }
+  .step-item.done .step-num { background: rgba(255,69,0,0.5); color: #fff; }
+  .step-item:not(.active):not(.done) .step-num { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
+  .step-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; }
+  .step-item.active .step-label { color: #fff; font-weight: 700; }
+  .step-item.done .step-label { color: rgba(255,255,255,0.5); }
+  .step-item:not(.active):not(.done) .step-label { color: rgba(255,255,255,0.3); }
+  .form-btn-row { display: flex; align-items: center; margin-top: 8px; gap: 12px; }
+  .btn-back { background: transparent; color: rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 12px 22px; font-family: 'Oswald', sans-serif; font-size: 0.82rem; cursor: pointer; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.2s; }
+  .btn-back:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); }
+  .btn-submit { background: var(--fire); color: #fff; border: none; border-radius: 6px; padding: 15px 32px; font-family: 'Oswald', sans-serif; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; flex: 1; transition: all 0.3s; box-shadow: 0 4px 18px rgba(255,69,0,0.35); }
+  .btn-submit:hover:not(:disabled) { background: var(--ember); transform: translateY(-1px); }
+  .btn-submit:disabled { opacity: 0.45; cursor: not-allowed; }
+  .field-hint { font-size: 0.72rem; color: rgba(255,255,255,0.28); margin-top: 6px; }
+  .error-box { background: rgba(255,69,0,0.12); border: 1px solid var(--fire); border-radius: 6px; padding: 12px 16px; color: #ff7f7f; font-size: 0.88rem; margin-bottom: 16px; }
+  .success-box { text-align: center; padding: 60px 20px; }
+  .success-icon { font-size: 4rem; margin-bottom: 20px; }
+  .success-title { font-family: 'Oswald', sans-serif; font-size: 2.2rem; font-weight: 700; text-transform: uppercase; color: #fff; margin-bottom: 12px; }
+  .success-sub { color: rgba(255,255,255,0.52); font-size: 0.95rem; line-height: 1.7; max-width: 400px; margin: 0 auto 28px; }
+
+  /* CONTACT */
+  .contact-section { background: #0a0a0a; border-top: 2px solid var(--fire); padding: 80px 5%; }
+  .contact-inner { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .contact-title { font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; text-transform: uppercase; color: #fff; line-height: 1.1; margin-bottom: 6px; }
+  .contact-title span { color: var(--fire); }
+  .contact-subtitle { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.42); margin-bottom: 28px; }
+  .contact-line { display: flex; align-items: center; gap: 13px; margin-bottom: 18px; }
+  .contact-icon { width: 40px; height: 40px; background: rgba(255,69,0,0.1); border: 1px solid rgba(255,69,0,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+  .contact-text { font-size: 0.95rem; color: rgba(255,255,255,0.75); }
+  .contact-text a { color: rgba(255,255,255,0.75); text-decoration: none; }
+  .contact-text a:hover { color: var(--gold); }
+  .cta-box { background: linear-gradient(135deg, rgba(255,69,0,0.14), rgba(255,107,0,0.07)); border: 1px solid rgba(255,107,0,0.28); border-radius: 10px; padding: 32px 28px; text-align: center; }
+  .cta-box h3 { font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 700; text-transform: uppercase; color: #fff; margin-bottom: 8px; }
+  .cta-box p { font-size: 0.87rem; color: rgba(255,255,255,0.5); margin-bottom: 22px; line-height: 1.6; }
+  .cta-min { font-size: 0.74rem; color: rgba(255,255,255,0.28); margin-top: 10px; }
+
+  /* FOOTER */
+  footer { background: #000; border-top: 1px solid rgba(255,107,0,0.08); padding: 36px 5%; text-align: center; }
+  .footer-logo { font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px; }
+  .footer-tagline { font-family: 'Playfair Display', serif; font-style: italic; color: rgba(255,255,255,0.3); font-size: 0.83rem; margin-bottom: 18px; }
+  .footer-bottom { font-size: 0.72rem; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
+
+  /* MOBILE */
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 72px; left: 0; right: 0; background: rgba(8,8,8,0.98); padding: 16px 24px; gap: 0; border-bottom: 2px solid var(--fire); z-index: 999; }
+    .nav-links.open li { border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .nav-links.open a { display: block; padding: 14px 0; font-size: 1.05rem; }
+  }
+  @media (max-width: 720px) {
+    .about-inner { grid-template-columns: 1fr; }
+    .about-stat { border-right: none; border-bottom: 1px solid rgba(255,107,0,0.1); padding: 20px; }
+    .about-stat:last-child { border-bottom: none; }
+    .menu-grid, .packages-grid, .sandwich-grid, .extras-grid, .info-grid, .check-grid, .pkg-select-grid, .form-grid2 { grid-template-columns: 1fr; }
+    .events-grid { grid-template-columns: 1fr 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 36px; }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-outline { width: 100%; max-width: 300px; text-align: center; }
+    .extra-meat-banner { flex-direction: column; gap: 6px; }
+    .step-label { display: none; }
+    .form-card { padding: 20px 16px; }
+  }
+  @media (max-width: 420px) {
+    .events-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 16px; }
+  }
+
+  /* Mobile form fixes */
+  @media (max-width: 720px) {
+    .order-form-wrap { padding: 0 4px; }
+    .form-card { padding: 18px 14px; margin-bottom: 14px; }
+    .form-input, .form-select, .form-textarea {
+      font-size: 16px !important; /* Prevents iOS zoom on focus */
+      padding: 13px 14px !important;
+    }
+    .btn-submit { padding: 16px 20px; font-size: 0.95rem; width: 100%; }
+    .btn-back { padding: 12px 16px; }
+    .form-btn-row { flex-direction: column; }
+    .qty-btn { width: 38px; height: 38px; font-size: 1.2rem; }
+    .step-bar { margin-bottom: 22px; }
+    .check-item { padding: 12px 10px; }
+    .pkg-card { padding: 16px 12px; }
+    .summary-row { font-size: 0.88rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SMOKIN' <span>&amp;</span> CERV'N</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#catering">Catering</a></li>
+    <li><a href="#sandwiches">Sandwiches</a></li>
+    <li><a href="#order">Order</a></li>
+    <li><a href="#contact" class="nav-cta">Book Event</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🔥 At The Mill · Whittier, CA</div>
+  <h1>SMOKIN'<br><span class="fire-text">&amp;</span><br>CERV'N</h1>
+  <div class="hero-sub">Real Smoke &nbsp;·&nbsp; Real Flavor</div>
+  <div class="hero-tagline">Real Smoke &nbsp;·&nbsp; Real Flavor &nbsp;·&nbsp; Smoked to Perfection</div>
+  <div class="hero-btns">
+    <a href="#order" class="btn-primary">🍖 Place a Catering Order</a>
+    <a href="#catering" class="btn-outline">View Packages</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="about-strip">
+  <div class="about-inner">
+    <div class="about-stat">
+      <div class="about-stat-num">100%</div>
+      <div class="about-stat-label">Real Wood Smoke</div>
+    </div>
+    <div class="about-stat">
+      <div class="about-stat-num">5+</div>
+      <div class="about-stat-label">Signature Meats</div>
+    </div>
+    <div class="about-stat">
+      <div class="about-stat-num">$500</div>
+      <div class="about-stat-label">On-Site Minimum</div>
+    </div>
+  </div>
+</div>
+
+<!-- MENU -->
+<section id="menu" class="menu-section">
+  <div class="section-header">
+    <div class="section-label">The Lineup</div>
+    <div class="section-title">Our <span>Menu</span></div>
+    <div class="section-divider"></div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-card-header"><div class="menu-card-icon">🔥</div><div class="menu-card-title">Choice of Meats</div></div>
+      <div class="menu-card-body">
+        <div class="menu-item"><div class="menu-item-name">Chicken</div></div>
+        <div class="menu-item"><div class="menu-item-name">Pulled Pork</div></div>
+        <div class="menu-item"><div class="menu-item-name">Baby Back Ribs</div></div>
+        <div class="menu-item"><div class="menu-item-name">Sausage / Hot Links</div></div>
+        <div class="menu-item"><div class="menu-item-name">Tri-Tip <small>+$1 per person</small></div></div>
+        <div class="menu-note">Additional meats available upon request</div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-header"><div class="menu-card-icon">🌽</div><div class="menu-card-title">Choice of Sides</div></div>
+      <div class="menu-card-body">
+        <div class="menu-item"><div class="menu-item-name">BBQ Beans</div></div>
+        <div class="menu-item"><div class="menu-item-name">Coleslaw</div></div>
+        <div class="menu-item"><div class="menu-item-name">Potato Salad</div></div>
+        <div class="menu-item"><div class="menu-item-name">Corn on the Cob</div></div>
+        <div class="menu-item"><div class="menu-item-name">Twice Baked Potatoes <small>Up-charge applies</small></div></div>
+        <div class="menu-item"><div class="menu-item-name">Mac & Cheese <small>Up-charge applies</small></div></div>
+        <div class="menu-note">Specialty sides available upon request</div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-header"><div class="menu-card-icon">⚖️</div><div class="menu-card-title">Meat by the Pound</div></div>
+      <div class="menu-card-body">
+        <div class="menu-item"><div class="menu-item-name">Tri-Tip</div><div class="menu-item-price">$30 /lb</div></div>
+        <div class="menu-item"><div class="menu-item-name">Pulled Pork</div><div class="menu-item-price">$25 /lb</div></div>
+        <div class="menu-item"><div class="menu-item-name">Chicken Breast</div><div class="menu-item-price">$8 each</div></div>
+        <div class="menu-item"><div class="menu-item-name">Sausage / Hot Link</div><div class="menu-item-price">$8 each</div></div>
+        <div class="menu-item"><div class="menu-item-name">Baby Back Ribs <small>Approx. 14 ribs per rack</small></div><div class="menu-item-price">$40 /rack</div></div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-header"><div class="menu-card-icon">🍞</div><div class="menu-card-title">Extras & Add-Ons</div></div>
+      <div class="menu-card-body">
+        <div class="menu-item"><div class="menu-item-name">Cornbread w/ Honey Butter</div><div class="menu-item-price">$25 /dozen</div></div>
+        <div class="menu-item"><div class="menu-item-name">Slider Trays <small>24 per tray</small></div><div class="menu-item-price">$40</div></div>
+        <div class="menu-item"><div class="menu-item-name">Add 2 Sides to Sandwich Orders</div><div class="menu-item-price">$5 /person</div></div>
+        <div class="menu-note">Texas Toast included with all catering packages</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATERING -->
+<section id="catering" class="catering-section">
+  <div class="section-header">
+    <div class="section-label">Feed the Crowd</div>
+    <div class="section-title">Catering <span>Packages</span></div>
+    <div class="section-divider"></div>
+    <p style="margin-top:14px;color:rgba(255,255,255,0.38);font-size:0.87rem;max-width:460px;margin-left:auto;margin-right:auto;">All packages include choice of 2 meats, 2 sides & Texas Toast</p>
+  </div>
+  <div class="packages-grid">
+    <div class="package-card">
+      <div class="package-header">
+        <div class="package-size">5</div>
+        <div class="package-size-label">Person Package</div>
+        <div class="package-price">$150</div>
+      </div>
+      <div class="package-body">
+        <div class="package-includes">Includes</div>
+        <div class="package-items">
+          <div class="pkg-item"><div class="pkg-item-qty">2 lbs</div><div class="pkg-item-label">Tri-Tip</div></div>
+          <div class="pkg-item"><div class="pkg-item-qty">5</div><div class="pkg-item-label">Chicken Breasts</div></div>
+          <div class="pkg-item"><div class="pkg-item-qty">10</div><div class="pkg-item-label">Sausages/Links</div></div>
+          <div class="pkg-item"><div class="pkg-item-qty">2 lbs</div><div class="pkg-item-label">Pulled Pork</div></div>
+          <div class="pkg-item" style="grid-column:1/-1"><div class="pkg-item-qty">2 racks</div><div class="pkg-item-label">Baby Back Ribs</div></div>
+        </div>
+        <div class="pkg-note">+ 2 sides & Texas Toast</div>
+      </div>
+      <div class="package-footer"><a href="#order" class="btn-primary" style="display:block;width:100%;text-align:center;">Book This Package</a></div>
+    </div>
+    <div class="package-card featured">
+      <div class="package-badge">Most Popular</div>
+      <div class="package-header">
+        <div class="package-size">12</div>
+        <div class="package-size-label">Person Package</div>
+        <div class="package-price">$360</div>
+      </div>
+      <div class="package-body">
+        <div class="package-includes">Includes</div>
+        <div class="package-items">
+          <div class="pkg-item"><div class="pkg-item-qty">4 lbs</div><div class="pkg-item-label">Tri-Tip</div></div>
+          <div class="pkg-item"><div class="pkg-item-qty">12</div><div class="pkg-item-label">Chicken Breasts</div></div>
+          <div class="pkg-item"><div class="pkg-item-qty">4 racks</div><div class="pkg-item-label">Baby Back Ribs</div></div>
+          <div class="pkg-item"><div class="pkg-item-qty">4 lbs</div><div class="pkg-item-label">Pulled Pork</div></div>
+          <div class="pkg-item" style="grid-column:1/-1"><div class="pkg-item-qty">24</div><div class="pkg-item-label">Sausages/Links</div></div>
+        </div>
+        <div class="pkg-note">+ 2 sides & Texas Toast</div>
+      </div>
+      <div class="package-footer"><a href="#order" class="btn-primary" style="display:block;width:100%;text-align:center;">Book This Package</a></div>
+    </div>
+    <div class="package-card">
+      <div class="package-header">
+        <div class="package-size">24</div>
+        <div class="package-size-label">Person Package</div>
+        <div class="package-price">$720</div>
+      </div>
+      <div class="package-body">
+        <div class="package-includes">Includes</div>
+        <div class="package-items">
+          <div class="pkg-item"><div class="pkg-item-qty">8 lbs</div><div class="pkg-item-label">Tri-Tip</div></div>
+          <div class="pkg-item"><div class="pkg-item-qty">24</div><div class="pkg-item-label">Chicken Breasts</div></div>
+          <div class="pkg-item"><div class="pkg-item-qty">8 racks</div><div class="pkg-item-label">Baby Back Ribs</div></div>
+          <div class="pkg-item"><div class="pkg-item-qty">8 lbs</div><div class="pkg-item-label">Pulled Pork</div></div>
+          <div class="pkg-item" style="grid-column:1/-1"><div class="pkg-item-qty">48</div><div class="pkg-item-label">Sausages/Links</div></div>
+        </div>
+        <div class="pkg-note">+ 2 sides & Texas Toast</div>
+      </div>
+      <div class="package-footer"><a href="#order" class="btn-primary" style="display:block;width:100%;text-align:center;">Book This Package</a></div>
+    </div>
+  </div>
+  <div class="extra-meat-banner">
+    <span>⭐ Need More?</span>
+    <strong>Add Extra Meat — $5 Per Person</strong>
+    <span>· Discounted pricing for orders of 25+ ·</span>
+  </div>
+</section>
+
+<!-- SANDWICHES -->
+<section id="sandwiches" class="sandwiches-section">
+  <div class="section-header">
+    <div class="section-label">Handheld Classics</div>
+    <div class="section-title">Sandwich <span>Options</span></div>
+    <div class="section-divider"></div>
+  </div>
+  <div class="sandwich-grid">
+    <div class="sandwich-card"><div><div class="sandwich-name">Tri-Tip Sandwich</div></div><div class="sandwich-price">$22</div></div>
+    <div class="sandwich-card"><div><div class="sandwich-name">Chicken Sandwich</div></div><div class="sandwich-price">$20</div></div>
+    <div class="sandwich-card"><div><div class="sandwich-name">Rib Sandwich</div></div><div class="sandwich-price">$16</div></div>
+    <div class="sandwich-card"><div><div class="sandwich-name">Pulled Pork Sandwich</div><div class="sandwich-note">With pickles & slaw</div></div><div class="sandwich-price">$20</div></div>
+  </div>
+  <div class="chips-badge">🍟 All sandwiches include chips</div>
+</section>
+
+<!-- INFO -->
+<section class="info-section">
+  <div class="section-header">
+    <div class="section-label">Good to Know</div>
+    <div class="section-title">Additional <span>Info</span></div>
+    <div class="section-divider"></div>
+  </div>
+  <div class="info-grid">
+    <div class="info-card"><div class="info-icon">💰</div><div class="info-title">Bulk Discounts</div><div class="info-text">Discounted pricing available for orders of 25 or more. Great for corporate events and large gatherings.</div></div>
+    <div class="info-card"><div class="info-icon">✏️</div><div class="info-title">Custom Orders</div><div class="info-text">Every event is different. Orders can be fully customized for large parties — just reach out.</div></div>
+    <div class="info-card"><div class="info-icon">🚚</div><div class="info-title">On-Site Catering</div><div class="info-text">We come to you. On-site catering minimum is $500 (food not included). We handle setup and service.</div></div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-section">
+  <div class="section-header">
+    <div class="section-label">We Cater</div>
+    <div class="section-title">Perfect For Any <span>Event</span></div>
+    <div class="section-divider"></div>
+  </div>
+  <div class="events-grid">
+    <div class="event-pill">🎉 Parties</div>
+    <div class="event-pill">💍 Weddings</div>
+    <div class="event-pill">💼 Corporate Events</div>
+    <div class="event-pill">🎪 Festivals</div>
+    <div class="event-pill">👨‍👩‍👧 Family Gatherings</div>
+    <div class="event-pill">🎓 Graduations</div>
+    <div class="event-pill">⛪ Church Events</div>
+    <div class="event-pill">🏫 School Events</div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section id="order" class="order-section">
+  <div class="section-header">
+    <div class="section-label">Let's Get Cooking</div>
+    <div class="section-title">Place Your <span>Order</span></div>
+    <div class="section-divider"></div>
+    <p style="margin-top:14px;color:rgba(255,255,255,0.38);font-size:0.87rem;">Fill out the form — we'll confirm within 24 hours</p>
+  </div>
+  <div class="order-form-wrap" id="orderFormWrap">
+    <!-- Injected by JS -->
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div>
+      <div class="contact-title">Get In <span>Touch</span></div>
+      <div class="contact-subtitle">Real smoke. Real flavor. Real easy to book.</div>
+      <div class="contact-line"><div class="contact-icon">📞</div><div class="contact-text"><a href="tel:2133052625">(213) 305-2625</a></div></div>
+      <div class="contact-line"><div class="contact-icon">📍</div><div class="contact-text">4210 Workman Mill Rd<br>Whittier, CA 90601</div></div>
+      <div class="contact-line"><div class="contact-icon">⏰</div><div class="contact-text">Available 7 days a week<br><span style="color:rgba(255,255,255,0.35);font-size:0.82rem;">Call to check availability</span></div></div>
+    </div>
+    <div class="cta-box">
+      <h3>🔥 Ready to Book?</h3>
+      <p>Give us a call or fill out the order form above. We'll build the perfect menu for your crew — 5 people or 500.</p>
+      <a href="tel:2133052625" class="btn-primary" style="display:block;width:100%;text-align:center;">📞 Call (213) 305-2625</a>
+      <div class="cta-min">On-site catering minimum: $500 · Food not included in minimum</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SMOKIN' &amp; CERV'N</div>
+  <div class="footer-tagline">Real Smoke. Real Flavor. Smoked to Perfection.</div>
+  <div class="footer-bottom">© 2026 Smokin' & Cerv'n at The Mill · 4210 Workman Mill Rd, Whittier, CA 90601 · (213) 305-2625</div>
+</footer>
+
+<script>
+// ─── NAV ───
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('#navLinks a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+
+// ─── ORDER FORM ───
+const MEATS = ['Chicken','Pulled Pork','Baby Back Ribs','Sausage / Hot Links','Tri-Tip (+$1/person)'];
+const SIDES = ['BBQ Beans','Coleslaw','Potato Salad','Corn on the Cob','Twice Baked Potatoes (up-charge)','Mac & Cheese (up-charge)'];
+const PACKAGES = [
+  {id:'5person',label:'5 Person Package',price:150},
+  {id:'12person',label:'12 Person Package',price:360},
+  {id:'24person',label:'24 Person Package',price:720},
+  {id:'custom',label:'Custom / Large Event',price:null},
+];
+const SANDWICHES = [
+  {name:'Tri-Tip Sandwich',price:22,qty:0},
+  {name:'Chicken Sandwich',price:20,qty:0},
+  {name:'Rib Sandwich',price:16,qty:0},
+  {name:'Pulled Pork Sandwich',price:20,qty:0},
+];
+const EXTRAS = [
+  'Cornbread w/ Honey Butter ($25/dozen)',
+  'Slider Trays ($40/tray of 24)',
+  'Add 2 Sides to Sandwich Orders ($5/person)',
+];
+const EVENT_TYPES = ['Backyard Party','Wedding','Corporate Event','Festival','Family Gathering','Graduation','Church Event','School Event','Other'];
+
+let state = {
+  step: 1,
+  name:'',phone:'',email:'',
+  eventDate:'',eventType:'',guestCount:'',location:'',
+  packageChoice:'',
+  meats:[],sides:[],
+  sandwiches: SANDWICHES.map(s=>({...s})),
+  extras:[],
+  specialRequests:'',
+  submitted: false,
+  loading: false,
+  error: '',
+};
+
+function calcTotal() {
+  let t = 0;
+  const pkg = PACKAGES.find(p=>p.id===state.packageChoice);
+  if (pkg?.price) t += pkg.price;
+  if (state.meats.includes('Tri-Tip (+$1/person)')) t += parseInt(state.guestCount)||0;
+  state.sandwiches.forEach(s=>{ t += s.qty * s.price; });
+  if (state.extras.includes('Cornbread w/ Honey Butter ($25/dozen)')) t += 25;
+  if (state.extras.includes('Slider Trays ($40/tray of 24)')) t += 40;
+  return t;
+}
+
+function toggle(arr, val) {
+  return arr.includes(val) ? arr.filter(x=>x!==val) : [...arr, val];
+}
+
+function render() {
+  const wrap = document.getElementById('orderFormWrap');
+  if (!wrap) return;
+
+  if (state.submitted) {
+    wrap.innerHTML = `
+      <div class="form-card" style="text-align:center;padding:52px 28px;">
+        <div style="font-size:3.5rem;margin-bottom:18px;">🔥</div>
+        <div style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;text-transform:uppercase;color:#fff;margin-bottom:10px;">Order Received!</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:0.92rem;line-height:1.7;max-width:380px;margin:0 auto 24px;">
+          We got your request and will call you within 24 hours to confirm everything.
+        </div>
+        <a href="tel:2133052625" style="display:inline-block;background:#FF4500;color:#fff;padding:13px 30px;border-radius:6px;font-family:'Oswald',sans-serif;font-size:0.95rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;">📞 (213) 305-2625</a>
+      </div>`;
+    return;
+  }
+
+  const s = state;
+  const step = s.step;
+
+  // Step bar
+  const stepBar = `
+    <div class="step-bar">
+      ${[{n:1,l:'Your Info'},{n:2,l:'Your Order'},{n:3,l:'Review'}].map(x=>`
+        <div class="step-item ${step===x.n?'active':step>x.n?'done':''}">
+          <div class="step-num">${step>x.n?'✓':x.n}</div>
+          <div class="step-label">${x.l}</div>
+        </div>`).join('')}
+    </div>`;
+
+  let content = '';
+
+  if (step === 1) {
+    content = `
+      <div class="form-card">
+        <div class="form-card-title">👤 Your Information</div>
+        <label class="form-label">Full Name *</label>
+        <input class="form-input" id="f-name" placeholder="John Smith" value="${s.name}" oninput="state.name=this.value;renderBtns()" />
+        <label class="form-label">Phone Number *</label>
+        <input class="form-input" id="f-phone" placeholder="(555) 555-5555" value="${s.phone}" oninput="state.phone=this.value;renderBtns()" />
+        <label class="form-label">Email Address <span style="color:rgba(255,255,255,0.25);font-size:0.7rem;">(optional)</span></label>
+        <input class="form-input" id="f-email" placeholder="john@email.com" value="${s.email}" oninput="state.email=this.value" />
+      </div>
+      <div class="form-card">
+        <div class="form-card-title">📅 Event Details</div>
+        <div class="form-grid2">
+          <div>
+            <label class="form-label">Event Date *</label>
+            <input class="form-input" id="f-date" type="date" value="${s.eventDate}" oninput="state.eventDate=this.value;renderBtns()" />
+          </div>
+          <div>
+            <label class="form-label">Number of Guests *</label>
+            <input class="form-input" id="f-guests" type="number" placeholder="25" min="1" value="${s.guestCount}" oninput="state.guestCount=this.value;renderBtns()" />
+          </div>
+        </div>
+        <label class="form-label">Event Type *</label>
+        <select class="form-select" id="f-etype" onchange="state.eventType=this.value;renderBtns()">
+          <option value="">Select event type...</option>
+          ${EVENT_TYPES.map(t=>`<option value="${t}" ${s.eventType===t?'selected':''}>${t}</option>`).join('')}
+        </select>
+        <label class="form-label">Event Location / Address *</label>
+        <input class="form-input" id="f-loc" placeholder="123 Main St, City, CA" value="${s.location}" oninput="state.location=this.value;renderBtns()" />
+      </div>
+      <div class="form-btn-row" id="btns1">
+        <button class="btn-submit" id="next1-btn" onclick="if(canNext1())setStep(2)" ${canNext1()?'':'disabled'}>
+          Next: Build Your Order →
+        </button>
+      </div>
+      ${!canNext1()?'<div class="field-hint" style="text-align:center;margin-top:8px;">Fill in all required fields to continue</div>':''}`;
+  }
+
+  if (step === 2) {
+    const pkgCards = PACKAGES.map(p=>`
+      <div class="pkg-select-card ${s.packageChoice===p.id?'selected':''}" onclick="state.packageChoice='${p.id}';render()">
+        <div class="pkg-select-name">${p.label}</div>
+        <div class="pkg-select-price">${p.price?'$'+p.price:'Get a Quote'}</div>
+        <div class="pkg-select-desc">${p.id==='custom'?'We\'ll build a custom menu':'2 meats · 2 sides · Texas Toast'}</div>
+      </div>`).join('');
+
+    const meatChecks = MEATS.map(m=>`
+      <div class="check-item ${s.meats.includes(m)?'checked':''}" onclick="state.meats=toggle(state.meats,'${m}');render()">
+        <div class="check-box">${s.meats.includes(m)?'<svg width="10" height="8" viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>':''}</div>
+        <span class="check-label">${m}</span>
+      </div>`).join('');
+
+    const sideChecks = SIDES.map(sd=>`
+      <div class="check-item ${s.sides.includes(sd)?'checked':''}" onclick="state.sides=toggle(state.sides,'${sd}');render()">
+        <div class="check-box">${s.sides.includes(sd)?'<svg width="10" height="8" viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>':''}</div>
+        <span class="check-label">${sd}</span>
+      </div>`).join('');
+
+    const sandRows = s.sandwiches.map((sd,i)=>`
+      <div class="sand-row">
+        <div><span class="sand-name">${sd.name}</span><span class="sand-price">$${sd.price}</span></div>
+        <div class="qty-box">
+          <button class="qty-btn" onclick="state.sandwiches[${i}].qty=Math.max(0,state.sandwiches[${i}].qty-1);render()">−</button>
+          <span class="qty-num">${sd.qty}</span>
+          <button class="qty-btn" onclick="state.sandwiches[${i}].qty++;render()">+</button>
+        </div>
+      </div>`).join('');
+
+    const extraChecks = EXTRAS.map(e=>`
+      <div class="check-item ${s.extras.includes(e)?'checked':''}" onclick="state.extras=toggle(state.extras,'${e.replace(/'/g,"\\'")}');render()" style="margin-bottom:8px;">
+        <div class="check-box">${s.extras.includes(e)?'<svg width="10" height="8" viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>':''}</div>
+        <span class="check-label">${e}</span>
+      </div>`).join('');
+
+    content = `
+      <div class="form-card">
+        <div class="form-card-title">📦 Choose a Package</div>
+        <div class="pkg-select-grid">${pkgCards}</div>
+      </div>
+      <div class="form-card">
+        <div class="form-card-title">🔥 Choose Your Meats <span style="font-size:0.68rem;color:rgba(255,255,255,0.3);font-weight:400;letter-spacing:1px;">SELECT AT LEAST 1</span></div>
+        <div class="check-grid">${meatChecks}</div>
+      </div>
+      <div class="form-card">
+        <div class="form-card-title">🌽 Choose Your Sides <span style="font-size:0.68rem;color:rgba(255,255,255,0.3);font-weight:400;letter-spacing:1px;">SELECT AT LEAST 1</span></div>
+        <div class="check-grid">${sideChecks}</div>
+      </div>
+      <div class="form-card">
+        <div class="form-card-title">🥪 Add Sandwiches <span style="font-size:0.68rem;color:rgba(255,255,255,0.3);font-weight:400;letter-spacing:1px;">OPTIONAL · INCLUDES CHIPS</span></div>
+        ${sandRows}
+      </div>
+      <div class="form-card">
+        <div class="form-card-title">✨ Extras <span style="font-size:0.68rem;color:rgba(255,255,255,0.3);font-weight:400;letter-spacing:1px;">OPTIONAL</span></div>
+        ${extraChecks}
+      </div>
+      <div class="form-card">
+        <div class="form-card-title">📝 Special Requests</div>
+        <textarea class="form-textarea" placeholder="Dietary restrictions, customizations, or any special notes..." oninput="state.specialRequests=this.value">${s.specialRequests}</textarea>
+      </div>
+      <div class="form-btn-row">
+        <button class="btn-back" onclick="setStep(1)">← Back</button>
+        <button class="btn-submit" onclick="if(canNext2())setStep(3)" ${canNext2()?'':'disabled'}>Review Order →</button>
+      </div>
+      ${!canNext2()?'<div class="field-hint" style="text-align:center;margin-top:8px;">Choose a package, at least 1 meat & 1 side</div>':''}`;
+  }
+
+  if (step === 3) {
+    const total = calcTotal();
+    const pkg = PACKAGES.find(p=>p.id===s.packageChoice);
+    const sandList = s.sandwiches.filter(x=>x.qty>0).map(x=>`${x.name} ×${x.qty}`).join(', ')||'None';
+
+    content = `
+      ${s.error?`<div class="error-box">${s.error}</div>`:''}
+      <div class="form-card">
+        <div class="form-card-title">📋 Order Summary</div>
+        <div class="summary-row"><span>Name</span><span>${s.name}</span></div>
+        <div class="summary-row"><span>Phone</span><span>${s.phone}</span></div>
+        ${s.email?`<div class="summary-row"><span>Email</span><span>${s.email}</span></div>`:''}
+        <div class="summary-row"><span>Event Date</span><span>${s.eventDate}</span></div>
+        <div class="summary-row"><span>Event Type</span><span>${s.eventType}</span></div>
+        <div class="summary-row"><span>Guests</span><span>${s.guestCount}</span></div>
+        <div class="summary-row"><span>Location</span><span>${s.location}</span></div>
+        <div style="height:10px;border-bottom:1px solid rgba(255,107,0,0.15);margin-bottom:10px;"></div>
+        <div class="summary-row"><span>Package</span><span style="color:#FFB800;font-weight:700;">${pkg?.label||''}</span></div>
+        <div class="summary-row"><span>Meats</span><span>${s.meats.join(', ')}</span></div>
+        <div class="summary-row"><span>Sides</span><span>${s.sides.join(', ')}</span></div>
+        <div class="summary-row"><span>Sandwiches</span><span>${sandList}</span></div>
+        ${s.extras.length?`<div class="summary-row"><span>Extras</span><span>${s.extras.join(', ')}</span></div>`:''}
+        ${s.specialRequests?`<div class="summary-row"><span>Notes</span><span style="font-style:italic;color:rgba(255,255,255,0.5);">${s.specialRequests}</span></div>`:''}
+        <div class="summary-total">
+          <span style="color:rgba(255,255,255,0.6);">Estimated Total</span>
+          <span style="color:#FF4500;">${total>0?'$'+total.toLocaleString():'To be quoted'}</span>
+        </div>
+        <div class="field-hint" style="margin-top:8px;">* Final pricing confirmed by our team. On-site min: $500</div>
+      </div>
+      <div class="form-btn-row">
+        <button class="btn-back" onclick="setStep(2)">← Back</button>
+        <button class="btn-submit" id="submit-btn" onclick="submitOrder()" ${s.loading?'disabled':''}>
+          ${s.loading?'Sending...':'🔥 Submit Order'}
+        </button>
+      </div>
+      <div class="field-hint" style="text-align:center;margin-top:10px;">We'll call you within 24 hours to confirm</div>`;
+  }
+
+  wrap.innerHTML = stepBar + content;
+}
+
+function canNext1() {
+  return !!(state.name && state.phone && state.eventDate && state.guestCount && state.location && state.eventType);
+}
+function canNext2() {
+  return !!(state.packageChoice && state.meats.length > 0 && state.sides.length > 0);
+}
+function setStep(n) {
+  state.step = n;
+  render();
+  document.getElementById('order').scrollIntoView({behavior:'smooth', block:'start'});
+}
+function renderBtns() { render(); }
+
+async function submitOrder() {
+  state.loading = true;
+  state.error = '';
+  render();
+  try {
+    const total = calcTotal();
+    const payload = {
+      ...state,
+      sandwiches: state.sandwiches.filter(s=>s.qty>0),
+      totalEstimate: total > 0 ? '$'+total.toLocaleString() : 'To be quoted',
+    };
+    const res = await fetch('https://oscar-92eaa636.base44.app/functions/sendBbqOrder', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      state.submitted = true;
+    } else {
+      state.error = 'Something went wrong. Please call us at (213) 305-2625.';
+      state.loading = false;
+    }
+  } catch(e) {
+    state.error = 'Network error. Please call (213) 305-2625 to place your order.';
+    state.loading = false;
+  }
+  render();
+}
+
+// Init
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", render);
+} else {
+  render();
+}
+</script>
+</body>
+</html>
