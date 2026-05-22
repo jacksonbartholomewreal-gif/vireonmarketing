@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wall-Tech LLC | Commercial Drywall Contractor | Nashville, TN</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#1a3a6e;--gold:#f5a623;--dark:#0f1e35;--light:#f4f6fa}
+body{font-family:'Barlow',sans-serif;color:#222;background:#fff}
+nav{background:var(--dark);display:flex;justify-content:space-between;align-items:center;padding:0 40px;height:70px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.logo-box{background:var(--blue);border:3px solid var(--gold);padding:6px 14px;border-radius:4px}
+.logo-box span{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:#fff;letter-spacing:1px}
+.logo-box em{color:var(--gold);font-style:normal}
+.logo-sub{font-size:10px;color:#aaa;letter-spacing:2px;text-transform:uppercase;margin-left:12px}
+.nav-left{display:flex;align-items:center}
+.nav-links{display:flex;gap:28px}
+.nav-links a{color:#ccc;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--dark);padding:10px 24px;border-radius:4px;font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;text-decoration:none}
+.hero{position:relative;height:620px;background:linear-gradient(135deg,#0a1628,#1a3a6e 60%,#0f2a50);display:flex;align-items:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&q=80') center/cover no-repeat;opacity:.12}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(245,166,35,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(245,166,35,.05) 1px,transparent 1px);background-size:60px 60px}
+.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 40px;width:100%}
+.badge{display:inline-block;background:var(--gold);color:var(--dark);font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;padding:6px 16px;border-radius:2px;margin-bottom:20px}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:72px;font-weight:900;color:#fff;line-height:1;text-transform:uppercase;margin-bottom:12px}
+.hero h1 span{color:var(--gold)}
+.hero-sub{font-size:19px;color:#b0c4e8;margin-bottom:32px;max-width:500px;line-height:1.5}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:var(--dark);padding:16px 36px;border-radius:4px;font-weight:800;font-size:15px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;display:inline-block}
+.btn-outline{border:2px solid rgba(255,255,255,.4);color:#fff;padding:16px 36px;border-radius:4px;font-weight:700;font-size:15px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;display:inline-block}
+.hero-stats{position:absolute;bottom:40px;right:60px;display:flex;gap:48px;z-index:2}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:900;color:var(--gold);line-height:1}
+.stat-label{font-size:11px;color:#aac;letter-spacing:2px;text-transform:uppercase}
+.trust-bar{background:var(--blue);padding:16px 40px;display:flex;justify-content:center;gap:50px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:10px;color:#fff;font-size:14px;font-weight:600}
+.sec{padding:80px 0}
+.container{max-width:1200px;margin:0 auto;padding:0 40px}
+.stag{font-size:11px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.stitle{font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:900;color:var(--dark);text-transform:uppercase;line-height:1.1;margin-bottom:14px}
+.ssub{font-size:17px;color:#555;max-width:600px;line-height:1.6;margin-bottom:48px}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.scard{background:var(--light);border-radius:8px;padding:36px 28px;border-top:4px solid var(--blue);transition:transform .2s,box-shadow .2s}
+.scard:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.1)}
+.scard-icon{font-size:36px;margin-bottom:16px}
+.scard h3{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;text-transform:uppercase;color:var(--dark);margin-bottom:10px}
+.scard p{font-size:15px;color:#555;line-height:1.6}
+.why-section{background:var(--dark);padding:80px 0}
+.why-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.why-img{position:relative}
+.why-img img{width:100%;height:420px;object-fit:cover;border-radius:8px;display:block}
+.img-badge{position:absolute;bottom:-20px;right:-20px;background:var(--gold);color:var(--dark);width:110px;height:110px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;text-align:center;line-height:1.2;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.img-badge b{font-size:28px}
+.why-content .stitle{color:#fff}
+.why-content .ssub{color:#99b}
+.wlist{list-style:none;display:flex;flex-direction:column;gap:16px}
+.wlist li{display:flex;align-items:flex-start;gap:14px;color:#ccd;font-size:16px;line-height:1.5}
+.chk{width:24px;height:24px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;color:var(--dark);font-weight:900;margin-top:2px}
+.proj-section{background:var(--light);padding:80px 0}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pcard{border-radius:8px;overflow:hidden;position:relative}
+.pcard img{width:100%;height:260px;object-fit:cover;display:block;transition:transform .3s}
+.pcard:hover img{transform:scale(1.05)}
+.pover{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(10,22,40,.95));padding:30px 20px 20px;color:#fff}
+.pover h4{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase}
+.pover span{font-size:13px;color:var(--gold);font-weight:600}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tcard{background:#fff;border-radius:8px;padding:32px 28px;box-shadow:0 4px 20px rgba(0,0,0,.06);border-bottom:3px solid var(--gold)}
+.stars{color:var(--gold);font-size:18px;margin-bottom:14px;letter-spacing:2px}
+.ttext{font-size:15px;color:#444;line-height:1.7;font-style:italic;margin-bottom:20px}
+.tname{font-weight:700;font-size:14px;color:var(--dark)}
+.trole{font-size:13px;color:#888}
+.cta-sec{background:linear-gradient(135deg,var(--blue),var(--dark));padding:80px 40px;text-align:center;position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,166,35,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(245,166,35,.04) 1px,transparent 1px);background-size:60px 60px}
+.cta-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.cta-sec h2{font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;color:#fff;text-transform:uppercase;line-height:1.1;margin-bottom:16px}
+.cta-sec p{color:#99b;font-size:17px;margin-bottom:36px;line-height:1.6}
+.cta-btns{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+footer{background:#080f1c;padding:50px 40px 30px}
+.fgrid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:40px}
+.flogo{background:var(--blue);border:2px solid var(--gold);display:inline-block;padding:8px 16px;border-radius:4px;margin-bottom:16px}
+.flogo span{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;color:#fff}
+.flogo em{color:var(--gold);font-style:normal}
+.fdesc{color:#556;font-size:14px;line-height:1.7}
+.fcol h4{color:#fff;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+.fcol a{display:block;color:#556;font-size:14px;margin-bottom:10px;text-decoration:none}
+.fcol a:hover{color:var(--gold)}
+.fci{color:#556;font-size:14px;margin-bottom:10px}
+.fbot{max-width:1200px;margin:0 auto;border-top:1px solid #1a2a40;padding-top:24px;display:flex;justify-content:space-between}
+.fbot p{color:#334;font-size:13px}
+.fbot em{color:var(--gold);font-style:normal}
+@media(max-width:900px){.services-grid,.proj-grid,.tgrid{grid-template-columns:1fr 1fr}.why-inner{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr;gap:30px}.hero h1{font-size:46px}.hero-stats{display:none}.nav-links{display:none}}
+@media(max-width:600px){.services-grid,.proj-grid,.tgrid{grid-template-columns:1fr}.hero h1{font-size:36px}nav{padding:0 20px}.container{padding:0 20px}.sec{padding:50px 0}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <div class="logo-box"><span>WALL<em>-</em>TECH</span></div>
+    <span class="logo-sub">Commercial Drywall LLC</span>
+  </div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="nav-cta">Get a Quote</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="badge">Nashville's Premier Commercial Drywall Contractor</div>
+    <h1>Built Right.<br><span>Built to Last.</span></h1>
+    <p class="hero-sub">Expert commercial drywall, metal framing, and finishing for Nashville's most demanding construction projects.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Request a Bid</a>
+      <a href="#projects" class="btn-outline">View Our Work</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">15+</div><div class="stat-label">Years Experience</div></div>
+    <div><div class="stat-num">500+</div><div class="stat-label">Projects Completed</div></div>
+    <div><div class="stat-num">100%</div><div class="stat-label">Client Satisfaction</div></div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-item">✅ Licensed &amp; Insured in Tennessee</div>
+  <div class="trust-item">🏗️ Commercial Specialists</div>
+  <div class="trust-item">⭐ 100% Recommended</div>
+  <div class="trust-item">📍 Nashville &amp; Middle Tennessee</div>
+</div>
+
+<section class="sec" id="services">
+  <div class="container">
+    <div class="stag">What We Do</div>
+    <h2 class="stitle">Commercial Drywall<br>Done Right</h2>
+    <p class="ssub">From new construction to tenant improvement, Wall-Tech LLC delivers precision craftsmanship on every job — on time, on budget.</p>
+    <div class="services-grid">
+      <div class="scard"><div class="scard-icon">🏢</div><h3>New Construction</h3><p>Full-scope drywall and metal framing for commercial builds — office buildings, retail centers, warehouses, and more.</p></div>
+      <div class="scard"><div class="scard-icon">🔨</div><h3>Tenant Improvement</h3><p>Fast, professional TI work that keeps tenants happy and projects on schedule. We work with GCs across Nashville.</p></div>
+      <div class="scard"><div class="scard-icon">📐</div><h3>Metal Framing</h3><p>Precision metal stud framing for interior walls, ceilings, and complex architectural features at any scale.</p></div>
+      <div class="scard"><div class="scard-icon">🎨</div><h3>Finishing &amp; Texture</h3><p>Level 5 finish, smooth, skip trowel, and custom texture — we deliver the final look your project demands.</p></div>
+      <div class="scard"><div class="scard-icon">🔊</div><h3>Acoustic Ceilings</h3><p>Sound-rated assemblies for offices, healthcare, schools, and multi-family projects requiring acoustic control.</p></div>
+      <div class="scard"><div class="scard-icon">🏗️</div><h3>Large-Scale Projects</h3><p>High-rise, mixed-use, and multi-phase commercial projects. We have the crew and experience to handle volume.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="why-section" id="about">
+  <div class="why-inner">
+    <div class="why-img">
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Wall-Tech project">
+      <div class="img-badge"><b>100%</b>Client<br>Satisfaction</div>
+    </div>
+    <div class="why-content">
+      <div class="stag">Why Wall-Tech</div>
+      <h2 class="stitle">Nashville's Most<br>Trusted Drywall Crew</h2>
+      <p class="ssub">We've built our reputation on showing up, doing the work right, and treating every GC like a long-term partner.</p>
+      <ul class="wlist">
+        <li><div class="chk">✓</div><span><strong>Commercial-only specialists</strong> — this is all we do. No split focus, no compromises.</span></li>
+        <li><div class="chk">✓</div><span><strong>On-time, every time</strong> — our crews are punctual and production-focused. Delays cost you money.</span></li>
+        <li><div class="chk">✓</div><span><strong>Clean, safe job sites</strong> — OSHA-compliant and respectful of your GC's schedule and other trades.</span></li>
+        <li><div class="chk">✓</div><span><strong>Transparent bidding</strong> — detailed scope, no surprises. We stick to what we quote.</span></li>
+        <li><div class="chk">✓</div><span><strong>Local Nashville team</strong> — we're your neighbors and we stand behind every single job.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="proj-section" id="projects">
+  <div class="container">
+    <div class="stag">Our Work</div>
+    <h2 class="stitle">Recent Projects</h2>
+    <p class="ssub">From high-rise commercial builds to boutique tenant improvements across Middle Tennessee.</p>
+    <div class="proj-grid">
+      <div class="pcard"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Office"><div class="pover"><span>Nashville, TN</span><h4>Corporate Office Build-Out</h4></div></div>
+      <div class="pcard"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="High-Rise"><div class="pover"><span>Downtown Nashville</span><h4>High-Rise Commercial Tower</h4></div></div>
+      <div class="pcard"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="Retail"><div class="pover"><span>Brentwood, TN</span><h4>Retail Center TI</h4></div></div>
+      <div class="pcard"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Medical"><div class="pover"><span>Franklin, TN</span><h4>Medical Office Complex</h4></div></div>
+      <div class="pcard"><img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=600&q=80" alt="Warehouse"><div class="pover"><span>Murfreesboro, TN</span><h4>Industrial Warehouse Fitout</h4></div></div>
+      <div class="pcard"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80" alt="Multi-Family"><div class="pover"><span>Nashville, TN</span><h4>Multi-Family Residential</h4></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="container">
+    <div class="stag">Client Reviews</div>
+    <h2 class="stitle">What GCs Are Saying</h2>
+    <p class="ssub">100% of clients recommend Wall-Tech LLC. Here's why.</p>
+    <div class="tgrid">
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"Wall-Tech came in on time, stayed on budget, and the finish was flawless. We've used them on three projects now and they never disappoint."</p><div class="tname">Marcus D.</div><div class="trole">General Contractor, Nashville</div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"Professional crew, clean site, excellent communication throughout. Exactly what you want from a drywall sub on a tight schedule."</p><div class="tname">Jennifer L.</div><div class="trole">Property Manager, Brentwood</div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"Needed a fast turnaround on a TI project and Wall-Tech delivered. Hard to find subs this reliable. They're our go-to now."</p><div class="tname">Robert K.</div><div class="trole">Project Manager, Franklin TN</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec" id="contact">
+  <div class="cta-inner">
+    <div class="stag" style="color:var(--gold)">Get Started</div>
+    <h2>Ready to Bid Your<br>Next Project?</h2>
+    <p>Contact Wall-Tech LLC today for a fast, detailed quote. We respond within 24 hours and serve all of Middle Tennessee.</p>
+    <div class="cta-btns">
+      <a href="tel:+16150000000" class="btn-primary">📞 Call Us Now</a>
+      <a href="mailto:info@walltechllc.com" class="btn-outline">✉️ Email Us</a>
+    </div>
+    <p style="color:#667;font-size:13px;margin-top:24px;">Serving Nashville, Brentwood, Franklin, Murfreesboro &amp; all of Middle Tennessee</p>
+  </div>
+</section>
+
+<footer>
+  <div class="fgrid">
+    <div>
+      <div class="flogo"><span>WALL<em>-</em>TECH LLC</span></div>
+      <p class="fdesc">Nashville's premier commercial drywall contractor. Licensed, insured, and committed to quality craftsmanship on every project.</p>
+    </div>
+    <div class="fcol">
+      <h4>Services</h4>
+      <a href="#">New Construction</a>
+      <a href="#">Tenant Improvement</a>
+      <a href="#">Metal Framing</a>
+      <a href="#">Finishing &amp; Texture</a>
+      <a href="#">Acoustic Ceilings</a>
+    </div>
+    <div class="fcol">
+      <h4>Contact</h4>
+      <div class="fci">📍 Nashville, TN &amp; Middle Tennessee</div>
+      <div class="fci">📞 (615) 000-0000</div>
+      <div class="fci">✉️ info@walltechllc.com</div>
+      <div class="fci">🕐 Mon–Fri: 7AM–5PM</div>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>© 2026 Wall-Tech LLC. All rights reserved.</p>
+    <p>Site by <em>Vireon Marketing</em></p>
+  </div>
+</footer>
+
+</body>
+</html>
