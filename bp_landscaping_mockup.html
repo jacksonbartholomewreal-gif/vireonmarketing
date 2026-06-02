@@ -5,144 +5,184 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>BP Landscaping LLC</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a1a; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI',Arial,sans-serif; color:#1a1a1a; overflow-x:hidden; }
 
   /* HEADER */
   header {
-    background: #fff;
-    padding: 18px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    position: sticky; top: 0; z-index: 100;
+    background:#fff; padding:16px 48px;
+    display:flex; align-items:center; justify-content:space-between;
+    box-shadow:0 2px 12px rgba(0,0,0,0.08);
+    position:sticky; top:0; z-index:200;
   }
-  .logo { display: flex; align-items: center; gap: 14px; }
-  .logo-icon {
-    width: 54px; height: 54px; background: #2e7d32;
-    border-radius: 50%; display: flex; align-items: center;
-    justify-content: center; font-size: 26px;
-  }
-  .logo-text { font-size: 22px; font-weight: 700; color: #2e7d32; line-height: 1.2; }
-  .logo-sub { font-size: 12px; color: #666; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; }
-  nav a {
-    margin-left: 28px; text-decoration: none; color: #333;
-    font-size: 15px; font-weight: 500; transition: color 0.2s;
-  }
-  nav a:hover { color: #2e7d32; }
-  .nav-cta {
-    background: #2e7d32; color: #fff !important;
-    padding: 10px 22px; border-radius: 6px;
-  }
-  .nav-cta:hover { background: #1b5e20 !important; color: #fff !important; }
+  .logo { display:flex; align-items:center; gap:14px; }
+  .logo-icon { width:52px; height:52px; background:linear-gradient(135deg,#2e7d32,#66bb6a); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; }
+  .logo-text { font-size:21px; font-weight:800; color:#2e7d32; }
+  .logo-sub { font-size:11px; color:#888; letter-spacing:1.5px; text-transform:uppercase; }
+  nav a { margin-left:26px; text-decoration:none; color:#333; font-size:14px; font-weight:600; transition:color .2s; }
+  nav a:hover { color:#2e7d32; }
+  .nav-cta { background:#2e7d32; color:#fff!important; padding:10px 22px; border-radius:6px; }
+  .nav-cta:hover { background:#1b5e20!important; }
 
   /* HERO */
   .hero {
-    background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #43a047 100%);
-    color: #fff; text-align: center;
-    padding: 100px 20px 80px;
-    position: relative; overflow: hidden;
+    min-height:92vh; background:linear-gradient(160deg,#1a3a1a 0%,#2e7d32 55%,#43a047 100%);
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; color:#fff; padding:80px 24px; position:relative; overflow:hidden;
   }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-  .hero h1 { font-size: 52px; font-weight: 800; margin-bottom: 18px; position: relative; }
-  .hero p { font-size: 20px; opacity: 0.92; max-width: 600px; margin: 0 auto 36px; position: relative; }
-  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
-  .btn-primary {
-    background: #fff; color: #2e7d32;
-    padding: 15px 34px; border-radius: 8px;
-    font-size: 16px; font-weight: 700; text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
-  .btn-secondary {
-    background: transparent; color: #fff;
-    border: 2px solid #fff;
-    padding: 15px 34px; border-radius: 8px;
-    font-size: 16px; font-weight: 700; text-decoration: none;
-    transition: background 0.2s;
-  }
-  .btn-secondary:hover { background: rgba(255,255,255,0.15); }
+  .hero-bg-circles { position:absolute; inset:0; pointer-events:none; }
+  .circle { position:absolute; border-radius:50%; opacity:.07; background:#fff; }
+  .c1 { width:600px; height:600px; top:-200px; right:-150px; }
+  .c2 { width:400px; height:400px; bottom:-100px; left:-100px; }
+  .c3 { width:200px; height:200px; top:40%; left:10%; }
+  .hero-content { position:relative; z-index:2; max-width:750px; }
+  .hero-badge { display:inline-block; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); color:#fff; padding:7px 18px; border-radius:30px; font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:24px; }
+  .hero h1 { font-size:62px; font-weight:900; line-height:1.1; margin-bottom:20px; }
+  .hero h1 span { color:#a5d6a7; }
+  .hero p { font-size:19px; opacity:.9; max-width:560px; margin:0 auto 38px; line-height:1.7; }
+  .hero-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .btn-white { background:#fff; color:#2e7d32; padding:16px 36px; border-radius:8px; font-size:16px; font-weight:800; text-decoration:none; transition:transform .2s,box-shadow .2s; }
+  .btn-white:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(0,0,0,.25); }
+  .btn-outline { background:transparent; color:#fff; border:2px solid rgba(255,255,255,.7); padding:16px 36px; border-radius:8px; font-size:16px; font-weight:700; text-decoration:none; transition:background .2s; }
+  .btn-outline:hover { background:rgba(255,255,255,.12); }
+  .scroll-arrow { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); font-size:26px; animation:bounce 1.8s infinite; opacity:.7; }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(10px)} }
 
   /* TRUST BAR */
-  .trust-bar {
-    background: #f9f9f9; border-bottom: 1px solid #eee;
-    padding: 20px 40px;
-    display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;
-  }
-  .trust-item { text-align: center; }
-  .trust-num { font-size: 28px; font-weight: 800; color: #2e7d32; }
-  .trust-label { font-size: 13px; color: #666; margin-top: 2px; }
+  .trust-bar { background:#f0faf0; border-top:3px solid #2e7d32; border-bottom:1px solid #d8eed8; padding:28px 40px; display:flex; justify-content:center; gap:60px; flex-wrap:wrap; }
+  .trust-item { text-align:center; }
+  .trust-num { font-size:32px; font-weight:900; color:#2e7d32; }
+  .trust-label { font-size:12px; color:#666; margin-top:3px; text-transform:uppercase; letter-spacing:1px; }
+
+  /* SECTIONS SHARED */
+  section { padding:90px 48px; }
+  .section-label { font-size:12px; color:#2e7d32; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:10px; }
+  .section-title { font-size:40px; font-weight:900; color:#1a1a1a; margin-bottom:14px; line-height:1.15; }
+  .section-sub { font-size:17px; color:#666; max-width:580px; line-height:1.7; }
+  .centered { text-align:center; }
+  .centered .section-sub { margin:0 auto 54px; }
 
   /* SERVICES */
-  .services { padding: 80px 40px; background: #fff; text-align: center; }
-  .section-label { font-size: 13px; color: #2e7d32; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
-  .section-title { font-size: 38px; font-weight: 800; color: #1a1a1a; margin-bottom: 14px; }
-  .section-sub { font-size: 17px; color: #666; max-width: 560px; margin: 0 auto 50px; }
-  .services-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 28px; max-width: 1100px; margin: 0 auto;
-  }
-  .service-card {
-    background: #f8fdf8; border: 1px solid #e0f0e0;
-    border-radius: 14px; padding: 36px 24px;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(46,125,50,0.12); }
-  .service-icon { font-size: 42px; margin-bottom: 16px; }
-  .service-card h3 { font-size: 18px; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; }
-  .service-card p { font-size: 14px; color: #666; line-height: 1.6; }
+  .services { background:#fff; }
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:26px; max-width:1100px; margin:0 auto; }
+  .service-card { border-radius:16px; padding:36px 26px; border:1.5px solid #e8f5e9; background:#fafffe; transition:transform .25s,box-shadow .25s,border-color .25s; cursor:default; }
+  .service-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(46,125,50,.13); border-color:#81c784; }
+  .service-icon { width:58px; height:58px; background:linear-gradient(135deg,#e8f5e9,#c8e6c9); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:28px; margin-bottom:18px; }
+  .service-card h3 { font-size:17px; font-weight:700; margin-bottom:10px; }
+  .service-card p { font-size:14px; color:#666; line-height:1.65; }
 
-  /* WHY US */
-  .why { background: #1b5e20; color: #fff; padding: 80px 40px; text-align: center; }
-  .why .section-title { color: #fff; }
-  .why .section-sub { color: rgba(255,255,255,0.8); }
-  .why-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px; max-width: 900px; margin: 0 auto;
-  }
-  .why-item { padding: 20px; }
-  .why-item .icon { font-size: 38px; margin-bottom: 14px; }
-  .why-item h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
-  .why-item p { font-size: 14px; opacity: 0.85; line-height: 1.6; }
+  /* PROCESS */
+  .process { background:linear-gradient(135deg,#1b5e20,#2e7d32); color:#fff; text-align:center; }
+  .process .section-title { color:#fff; }
+  .process .section-sub { color:rgba(255,255,255,.8); margin:0 auto 54px; }
+  .process-steps { display:flex; gap:0; justify-content:center; flex-wrap:wrap; max-width:1000px; margin:0 auto; }
+  .step { flex:1; min-width:200px; max-width:220px; padding:20px; position:relative; }
+  .step:not(:last-child)::after { content:'→'; position:absolute; right:-14px; top:36px; font-size:28px; opacity:.5; }
+  .step-num { width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.15); border:2px solid rgba(255,255,255,.4); font-size:24px; font-weight:900; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
+  .step h4 { font-size:16px; font-weight:700; margin-bottom:8px; }
+  .step p { font-size:13px; opacity:.8; line-height:1.6; }
+
+  /* BEFORE/AFTER */
+  .before-after { background:#f4faf4; }
+  .ba-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; max-width:900px; margin:50px auto 0; align-items:center; }
+  .ba-card { border-radius:16px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,.1); }
+  .ba-label { padding:10px 20px; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
+  .ba-before .ba-label { background:#ffebee; color:#c62828; }
+  .ba-after .ba-label { background:#e8f5e9; color:#2e7d32; }
+  .ba-visual { height:220px; display:flex; align-items:center; justify-content:center; font-size:80px; }
+  .ba-before .ba-visual { background:linear-gradient(135deg,#795548,#a1887f); }
+  .ba-after .ba-visual { background:linear-gradient(135deg,#388e3c,#66bb6a); }
+  .ba-desc { padding:16px 20px; background:#fff; font-size:14px; color:#555; line-height:1.6; }
+
+  /* GALLERY STRIP */
+  .gallery { background:#1a1a1a; padding:70px 0; overflow:hidden; }
+  .gallery h2 { color:#fff; text-align:center; font-size:36px; font-weight:900; margin-bottom:10px; }
+  .gallery-sub { color:#aaa; text-align:center; margin-bottom:40px; font-size:16px; }
+  .gallery-strip { display:flex; gap:16px; padding:0 48px; flex-wrap:wrap; justify-content:center; }
+  .gallery-tile { border-radius:14px; overflow:hidden; width:200px; height:160px; display:flex; align-items:center; justify-content:center; font-size:60px; flex-shrink:0; }
+  .gt1 { background:linear-gradient(135deg,#2e7d32,#81c784); }
+  .gt2 { background:linear-gradient(135deg,#33691e,#aed581); }
+  .gt3 { background:linear-gradient(135deg,#1b5e20,#66bb6a); }
+  .gt4 { background:linear-gradient(135deg,#558b2f,#dce775); }
+  .gt5 { background:linear-gradient(135deg,#388e3c,#a5d6a7); }
+  .gt6 { background:linear-gradient(135deg,#1a3a1a,#43a047); }
+
+  /* PRICING */
+  .pricing { background:#fff; text-align:center; }
+  .pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px; max-width:900px; margin:0 auto; }
+  .price-card { border-radius:18px; padding:40px 30px; border:2px solid #e8f5e9; position:relative; transition:transform .2s,box-shadow .2s; }
+  .price-card:hover { transform:translateY(-4px); box-shadow:0 14px 36px rgba(46,125,50,.12); }
+  .price-card.featured { border-color:#2e7d32; background:#f0faf0; }
+  .price-badge { position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:#2e7d32; color:#fff; font-size:12px; font-weight:700; padding:5px 18px; border-radius:20px; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
+  .price-name { font-size:18px; font-weight:700; margin-bottom:8px; color:#1a1a1a; }
+  .price-amount { font-size:46px; font-weight:900; color:#2e7d32; margin:10px 0 4px; }
+  .price-amount span { font-size:18px; font-weight:400; color:#888; }
+  .price-desc { font-size:13px; color:#888; margin-bottom:24px; }
+  .price-features { list-style:none; text-align:left; margin-bottom:30px; }
+  .price-features li { font-size:14px; color:#444; padding:7px 0; border-bottom:1px solid #f0f0f0; display:flex; gap:10px; }
+  .price-features li::before { content:'✓'; color:#2e7d32; font-weight:700; flex-shrink:0; }
+  .price-btn { display:block; width:100%; padding:13px; background:#2e7d32; color:#fff; border-radius:8px; text-decoration:none; font-weight:700; font-size:15px; transition:background .2s; }
+  .price-btn:hover { background:#1b5e20; }
+  .price-card.featured .price-btn { background:#1b5e20; }
+
+  /* SERVICE AREAS */
+  .areas { background:#f0faf0; text-align:center; }
+  .areas-grid { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:800px; margin:0 auto; }
+  .area-tag { background:#fff; border:1.5px solid #c8e6c9; color:#2e7d32; padding:10px 22px; border-radius:30px; font-size:14px; font-weight:600; transition:background .2s,color .2s; cursor:default; }
+  .area-tag:hover { background:#2e7d32; color:#fff; }
 
   /* TESTIMONIALS */
-  .testimonials { background: #f4faf4; padding: 80px 40px; text-align: center; }
-  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
-  .testi-card { background: #fff; border-radius: 14px; padding: 30px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); text-align: left; }
-  .stars { color: #f9a825; font-size: 18px; margin-bottom: 12px; }
-  .testi-card p { font-size: 15px; color: #444; line-height: 1.7; font-style: italic; margin-bottom: 16px; }
-  .testi-author { font-size: 14px; font-weight: 700; color: #2e7d32; }
+  .testimonials { background:#fff; }
+  .testi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; max-width:1050px; margin:0 auto; }
+  .testi-card { background:#f9fdf9; border-radius:16px; padding:32px; border:1.5px solid #e8f5e9; position:relative; }
+  .testi-card::before { content:'"'; position:absolute; top:14px; right:24px; font-size:72px; color:#e8f5e9; font-family:Georgia,serif; line-height:1; }
+  .stars { color:#f9a825; font-size:17px; margin-bottom:14px; }
+  .testi-card p { font-size:15px; color:#444; line-height:1.75; font-style:italic; margin-bottom:18px; position:relative; z-index:1; }
+  .testi-author { font-size:14px; font-weight:700; color:#2e7d32; }
+  .testi-role { font-size:12px; color:#999; margin-top:2px; }
+
+  /* FAQ */
+  .faq { background:#1b5e20; color:#fff; }
+  .faq .section-title { color:#fff; }
+  .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:900px; margin:50px auto 0; }
+  .faq-item { background:rgba(255,255,255,.08); border-radius:12px; padding:26px; border:1px solid rgba(255,255,255,.12); }
+  .faq-item h4 { font-size:15px; font-weight:700; margin-bottom:10px; }
+  .faq-item p { font-size:14px; opacity:.8; line-height:1.65; }
 
   /* CTA */
-  .cta-section {
-    background: linear-gradient(135deg, #43a047, #2e7d32);
-    color: #fff; text-align: center; padding: 80px 40px;
-  }
-  .cta-section h2 { font-size: 40px; font-weight: 800; margin-bottom: 16px; }
-  .cta-section p { font-size: 18px; opacity: 0.92; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
-  .cta-phone { font-size: 32px; font-weight: 800; margin-bottom: 24px; }
-  .cta-phone a { color: #fff; text-decoration: none; }
+  .cta-section { background:linear-gradient(135deg,#43a047,#1b5e20); color:#fff; text-align:center; padding:100px 48px; }
+  .cta-section h2 { font-size:48px; font-weight:900; margin-bottom:16px; line-height:1.15; }
+  .cta-section p { font-size:18px; opacity:.9; margin-bottom:16px; max-width:520px; margin-left:auto; margin-right:auto; }
+  .cta-phone { font-size:36px; font-weight:900; margin:20px 0 32px; }
+  .cta-phone a { color:#fff; text-decoration:none; }
+  .cta-note { font-size:13px; opacity:.7; margin-top:18px; }
 
   /* FOOTER */
-  footer { background: #111; color: #aaa; text-align: center; padding: 30px 20px; font-size: 14px; }
-  footer span { color: #2e7d32; }
+  footer { background:#0d1f0d; color:#aaa; padding:40px 48px; }
+  .footer-inner { max-width:1000px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; }
+  .footer-logo { font-size:20px; font-weight:800; color:#66bb6a; }
+  .footer-links a { color:#aaa; text-decoration:none; margin-left:20px; font-size:14px; }
+  .footer-links a:hover { color:#66bb6a; }
+  .footer-copy { width:100%; text-align:center; font-size:13px; margin-top:20px; border-top:1px solid #1f3a1f; padding-top:20px; }
+  .footer-copy span { color:#66bb6a; }
 
   /* MOBILE */
-  @media (max-width: 768px) {
-    header { padding: 14px 20px; }
-    nav { display: none; }
-    .hero h1 { font-size: 34px; }
-    .hero p { font-size: 16px; }
-    .trust-bar { gap: 24px; padding: 20px; }
-    .services, .why, .testimonials, .cta-section { padding: 60px 20px; }
-    .section-title { font-size: 28px; }
-    .cta-section h2 { font-size: 28px; }
-    .cta-phone { font-size: 24px; }
+  @media(max-width:768px){
+    header { padding:14px 20px; }
+    nav { display:none; }
+    section { padding:60px 20px; }
+    .hero h1 { font-size:36px; }
+    .hero p { font-size:16px; }
+    .trust-bar { gap:24px; padding:20px; }
+    .section-title { font-size:28px; }
+    .ba-grid { grid-template-columns:1fr; }
+    .faq-grid { grid-template-columns:1fr; }
+    .process-steps { flex-direction:column; align-items:center; }
+    .step:not(:last-child)::after { content:'↓'; right:auto; bottom:-18px; top:auto; }
+    .cta-section h2 { font-size:30px; }
+    .cta-phone { font-size:26px; }
+    .footer-inner { flex-direction:column; text-align:center; }
+    .footer-links a { margin:0 10px; }
   }
 </style>
 </head>
@@ -153,139 +193,323 @@
   <div class="logo">
     <div class="logo-icon">🌿</div>
     <div>
-      <div class="logo-text">BP Landscaping</div>
-      <div class="logo-sub">LLC &nbsp;·&nbsp; Licensed & Insured</div>
+      <div class="logo-text">BP Landscaping LLC</div>
+      <div class="logo-sub">Licensed & Insured · Est. 2014</div>
     </div>
   </div>
   <nav>
     <a href="#services">Services</a>
-    <a href="#why">Why Us</a>
+    <a href="#process">Process</a>
+    <a href="#pricing">Pricing</a>
     <a href="#reviews">Reviews</a>
-    <a href="#contact" class="nav-cta">Free Quote</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="nav-cta">📞 Free Quote</a>
   </nav>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <h1>Your Yard, Our Passion</h1>
-  <p>Professional landscaping services that transform outdoor spaces — from routine maintenance to full custom installs.</p>
-  <div class="hero-btns">
-    <a href="#contact" class="btn-primary">📞 Get a Free Quote</a>
-    <a href="#services" class="btn-secondary">View Services</a>
+  <div class="hero-bg-circles">
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <div class="circle c3"></div>
   </div>
+  <div class="hero-content">
+    <div class="hero-badge">🏆 #1 Rated Local Landscaper</div>
+    <h1>We Make Yards Look <span>Incredible</span></h1>
+    <p>Full-service landscaping, maintenance, and design for homeowners and businesses who want a yard that turns heads.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-white">📞 Get a Free Quote</a>
+      <a href="#services" class="btn-outline">See Our Work ↓</a>
+    </div>
+  </div>
+  <div class="scroll-arrow">⌄</div>
 </section>
 
 <!-- TRUST BAR -->
 <div class="trust-bar">
   <div class="trust-item"><div class="trust-num">500+</div><div class="trust-label">Happy Clients</div></div>
-  <div class="trust-item"><div class="trust-num">10+</div><div class="trust-label">Years Experience</div></div>
-  <div class="trust-item"><div class="trust-num">5★</div><div class="trust-label">Google Rating</div></div>
-  <div class="trust-item"><div class="trust-num">100%</div><div class="trust-label">Satisfaction Guaranteed</div></div>
+  <div class="trust-item"><div class="trust-num">12+</div><div class="trust-label">Years Experience</div></div>
+  <div class="trust-item"><div class="trust-num">5.0★</div><div class="trust-label">Google Rating</div></div>
+  <div class="trust-item"><div class="trust-num">48hr</div><div class="trust-label">Quote Turnaround</div></div>
+  <div class="trust-item"><div class="trust-num">100%</div><div class="trust-label">Satisfaction Guarantee</div></div>
 </div>
 
 <!-- SERVICES -->
 <section class="services" id="services">
-  <div class="section-label">What We Do</div>
-  <h2 class="section-title">Full-Service Landscaping</h2>
-  <p class="section-sub">From weekly lawn care to complete outdoor transformations — we do it all.</p>
+  <div class="centered">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Everything Your Yard Needs</h2>
+    <p class="section-sub">From weekly lawn care to full outdoor overhauls — one crew, one call, zero hassle.</p>
+  </div>
   <div class="services-grid">
     <div class="service-card">
       <div class="service-icon">🌱</div>
       <h3>Lawn Maintenance</h3>
-      <p>Weekly and bi-weekly mowing, edging, trimming and cleanup to keep your property looking sharp year-round.</p>
+      <p>Weekly and bi-weekly mowing, edging, blowing, and trimming to keep your property looking sharp every season.</p>
     </div>
     <div class="service-card">
       <div class="service-icon">🪨</div>
       <h3>Hardscaping</h3>
-      <p>Patios, walkways, retaining walls, and fire pits designed and built to last for decades.</p>
+      <p>Patios, walkways, retaining walls, and fire pits — custom built with quality materials that last for decades.</p>
     </div>
     <div class="service-card">
       <div class="service-icon">🌺</div>
       <h3>Landscape Design</h3>
-      <p>Custom planting plans, flower beds, and garden installations tailored to your style and budget.</p>
+      <p>Full design consultations, custom planting plans, flower beds, and installs tailored to your style and budget.</p>
     </div>
     <div class="service-card">
       <div class="service-icon">💧</div>
-      <h3>Irrigation Systems</h3>
-      <p>Smart sprinkler installation, repair, and seasonal adjustments to keep your lawn green and water bills low.</p>
+      <h3>Irrigation & Drainage</h3>
+      <p>Smart sprinkler systems, drip lines, French drains, and seasonal adjustments to keep your lawn green and dry.</p>
     </div>
     <div class="service-card">
       <div class="service-icon">🌳</div>
       <h3>Tree & Shrub Care</h3>
-      <p>Trimming, shaping, removal, and stump grinding by trained professionals with full insurance coverage.</p>
+      <p>Professional trimming, shaping, removal, and stump grinding. We leave your property cleaner than we found it.</p>
     </div>
     <div class="service-card">
       <div class="service-icon">🍂</div>
       <h3>Seasonal Cleanup</h3>
-      <p>Spring and fall cleanups including leaf removal, debris hauling, mulching, and bed prep.</p>
+      <p>Spring and fall cleanups including leaf removal, bed prep, mulching, and debris hauling — in and out fast.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏡</div>
+      <h3>Sod Installation</h3>
+      <p>Fresh sod laid properly so it roots fast and stays lush. We prep the base, install, and leave you with a perfect lawn.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌙</div>
+      <h3>Outdoor Lighting</h3>
+      <p>Low-voltage landscape lighting that showcases your yard at night and boosts curb appeal and security.</p>
     </div>
   </div>
 </section>
 
-<!-- WHY US -->
-<section class="why" id="why">
-  <div class="section-label" style="color:#a5d6a7;">Why Choose Us</div>
-  <h2 class="section-title">The BP Landscaping Difference</h2>
-  <p class="section-sub">We're not a big franchise — we're your neighbors, and we treat every property like our own.</p>
-  <div class="why-grid">
-    <div class="why-item">
-      <div class="icon">🛡️</div>
-      <h4>Licensed & Insured</h4>
-      <p>Fully licensed and insured so you have zero liability on your property.</p>
+<!-- HOW IT WORKS -->
+<section class="process" id="process">
+  <div class="section-label" style="color:#a5d6a7;">How It Works</div>
+  <h2 class="section-title">Simple 4-Step Process</h2>
+  <p class="section-sub">Getting started is easy. We handle everything from the first call to the final cleanup.</p>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Call or Text Us</h4>
+      <p>Reach out and tell us what you need. We'll schedule a time that works for you.</p>
     </div>
-    <div class="why-item">
-      <div class="icon">⚡</div>
-      <h4>Fast Response</h4>
-      <p>Same-day or next-day quotes. We show up when we say we will — every time.</p>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Free On-Site Quote</h4>
+      <p>We come out, walk your property, and give you an honest upfront quote. No surprises.</p>
     </div>
-    <div class="why-item">
-      <div class="icon">💰</div>
-      <h4>Honest Pricing</h4>
-      <p>Upfront quotes with no hidden fees. You know exactly what you're paying before we start.</p>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>We Get to Work</h4>
+      <p>Our crew shows up on time and gets the job done right the first time, every time.</p>
     </div>
-    <div class="why-item">
-      <div class="icon">🤝</div>
-      <h4>Owner-Operated</h4>
-      <p>The owner is on every job. You get experienced hands, not just a crew dropped off by a manager.</p>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>You Love It</h4>
+      <p>We don't leave until you're 100% satisfied. Your yard, done right. Guaranteed.</p>
     </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="before-after" id="beforeafter">
+  <div class="centered">
+    <div class="section-label">Transformations</div>
+    <h2 class="section-title">Before & After</h2>
+    <p class="section-sub" style="margin:0 auto 0;">See the difference a professional crew makes.</p>
+  </div>
+  <div class="ba-grid">
+    <div class="ba-card ba-before">
+      <div class="ba-label">❌ Before</div>
+      <div class="ba-visual">🪨</div>
+      <div class="ba-desc">Overgrown, patchy lawn with weeds, dead grass, and no defined beds. Zero curb appeal.</div>
+    </div>
+    <div class="ba-card ba-after">
+      <div class="ba-label">✅ After BP Landscaping</div>
+      <div class="ba-visual">🌿</div>
+      <div class="ba-desc">Fresh sod, clean edging, new flower beds, and mulch. Neighbors stopped to ask who did it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gallery" id="gallery">
+  <h2>Our Work</h2>
+  <div class="gallery-sub">Every yard tells a story — here are a few of ours.</div>
+  <div class="gallery-strip">
+    <div class="gallery-tile gt1">🌿</div>
+    <div class="gallery-tile gt2">🌺</div>
+    <div class="gallery-tile gt3">🌳</div>
+    <div class="gallery-tile gt4">🏡</div>
+    <div class="gallery-tile gt5">💧</div>
+    <div class="gallery-tile gt6">🪨</div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-label centered">Transparent Pricing</div>
+  <h2 class="section-title centered">Simple, Honest Plans</h2>
+  <p class="section-sub centered" style="margin:0 auto 54px;">No hidden fees. No upsells. Just good work at a fair price.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Basic Maintenance</div>
+      <div class="price-amount">$80<span>/visit</span></div>
+      <div class="price-desc">Great for regular upkeep</div>
+      <ul class="price-features">
+        <li>Mow, edge & blow</li>
+        <li>Trim shrubs & hedges</li>
+        <li>Debris removal</li>
+        <li>Weekly or bi-weekly schedule</li>
+      </ul>
+      <a href="#contact" class="price-btn">Get Started</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-name">Full Service</div>
+      <div class="price-amount">$150<span>/visit</span></div>
+      <div class="price-desc">Everything you need, handled</div>
+      <ul class="price-features">
+        <li>Everything in Basic</li>
+        <li>Flower bed weeding & edging</li>
+        <li>Mulch refresh</li>
+        <li>Irrigation check</li>
+        <li>Priority scheduling</li>
+      </ul>
+      <a href="#contact" class="price-btn">Get Started</a>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Custom Project</div>
+      <div class="price-amount">Quote<span> based</span></div>
+      <div class="price-desc">For installs & transformations</div>
+      <ul class="price-features">
+        <li>Hardscape & patio builds</li>
+        <li>Full landscape redesign</li>
+        <li>Sod installation</li>
+        <li>Drainage solutions</li>
+        <li>Outdoor lighting</li>
+      </ul>
+      <a href="#contact" class="price-btn">Get a Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREAS -->
+<section class="areas">
+  <div class="centered">
+    <div class="section-label">Coverage</div>
+    <h2 class="section-title">Service Areas</h2>
+    <p class="section-sub" style="margin:0 auto 40px;">We serve homeowners and businesses across the region. Don't see your city? Call us anyway.</p>
+  </div>
+  <div class="areas-grid">
+    <div class="area-tag">📍 Honolulu</div>
+    <div class="area-tag">📍 Kailua</div>
+    <div class="area-tag">📍 Kaneohe</div>
+    <div class="area-tag">📍 Pearl City</div>
+    <div class="area-tag">📍 Ewa Beach</div>
+    <div class="area-tag">📍 Kapolei</div>
+    <div class="area-tag">📍 Mililani</div>
+    <div class="area-tag">📍 Waipahu</div>
+    <div class="area-tag">📍 Aiea</div>
+    <div class="area-tag">📍 Haleiwa</div>
+    <div class="area-tag">📍 & Surrounding Areas</div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
 <section class="testimonials" id="reviews">
-  <div class="section-label">Reviews</div>
-  <h2 class="section-title">What Our Clients Say</h2>
-  <p class="section-sub">Don't take our word for it — here's what real customers have to say.</p>
+  <div class="centered">
+    <div class="section-label">Reviews</div>
+    <h2 class="section-title">What Our Clients Say</h2>
+    <p class="section-sub" style="margin:0 auto 54px;">Over 500 happy customers and counting. Here's what a few of them had to say.</p>
+  </div>
   <div class="testi-grid">
     <div class="testi-card">
       <div class="stars">★★★★★</div>
-      <p>"BP Landscaping completely transformed our backyard. The attention to detail was incredible — everything was done exactly how we wanted it."</p>
-      <div class="testi-author">— Maria T., Homeowner</div>
+      <p>"BP Landscaping completely transformed our backyard. The detail was incredible — everything done exactly how we envisioned it. They even came back to touch up one small area without being asked."</p>
+      <div class="testi-author">Maria T.</div>
+      <div class="testi-role">Homeowner · Kailua, HI</div>
     </div>
     <div class="testi-card">
       <div class="stars">★★★★★</div>
-      <p>"They showed up on time, worked fast, and the yard looked amazing when they were done. Best landscaping crew I've ever hired. Will use again!"</p>
-      <div class="testi-author">— James R., Property Manager</div>
+      <p>"Showed up on time, worked fast, and the yard looked amazing when they were done. Best landscaping crew I've ever hired. My neighbors won't stop asking who did it."</p>
+      <div class="testi-author">James R.</div>
+      <div class="testi-role">Property Manager · Honolulu, HI</div>
     </div>
     <div class="testi-card">
       <div class="stars">★★★★★</div>
-      <p>"Honest pricing, great communication, and the work speaks for itself. My neighbors keep asking who did my landscaping. Highly recommend."</p>
-      <div class="testi-author">— Sandra K., Homeowner</div>
+      <p>"Honest pricing, great communication, and the work speaks for itself. I've used them for 3 years now and they've never once let me down. I won't use anyone else."</p>
+      <div class="testi-author">Sandra K.</div>
+      <div class="testi-role">Homeowner · Pearl City, HI</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Had them install a full patio and retaining wall. The craftsmanship was top notch and the price was very fair. They finished ahead of schedule and cleaned up everything perfectly."</p>
+      <div class="testi-author">Derek M.</div>
+      <div class="testi-role">Business Owner · Kaneohe, HI</div>
     </div>
   </div>
 </section>
 
-<!-- CTA / CONTACT -->
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="centered">
+    <div class="section-label" style="color:#a5d6a7;">FAQs</div>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <h4>How quickly can you give me a quote?</h4>
+      <p>We typically respond within a few hours and can usually do an on-site visit within 1–2 business days. Most quotes are delivered same day.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Are you licensed and insured?</h4>
+      <p>Yes — fully licensed and insured. You have zero liability on your property. We're happy to provide proof of insurance upon request.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Do you offer recurring maintenance plans?</h4>
+      <p>Absolutely. Most of our clients are on weekly or bi-weekly plans. We offer discounts for recurring customers who commit to a schedule.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What happens if I'm not happy with the work?</h4>
+      <p>We stand behind everything we do. If something isn't right, we'll come back and fix it — no questions asked. 100% satisfaction guaranteed.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Do you work on commercial properties?</h4>
+      <p>Yes! We service both residential and commercial properties including HOAs, apartment complexes, and office buildings.</p>
+    </div>
+    <div class="faq-item">
+      <h4>How do I get started?</h4>
+      <p>Just call or text us! We'll ask a few quick questions, schedule a free on-site visit, and get you a written quote with no obligation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
 <section class="cta-section" id="contact">
-  <h2>Ready for a Beautiful Yard?</h2>
-  <p>Contact us today for a free, no-obligation quote. We respond within the hour.</p>
-  <div class="cta-phone"><a href="tel:+1">📞 Call or Text for a Free Quote</a></div>
-  <a href="tel:+1" class="btn-primary" style="display:inline-block; font-size:17px; padding:16px 40px;">Get My Free Quote Today</a>
+  <h2>Let's Transform Your Yard</h2>
+  <p>Call or text today for a free on-site quote. We respond fast and show up when we say we will.</p>
+  <div class="cta-phone"><a href="tel:+1">📞 Call or Text Us Now</a></div>
+  <a href="tel:+1" class="btn-white" style="display:inline-block;font-size:17px;padding:17px 44px;">Get My Free Quote →</a>
+  <div class="cta-note">No obligation · Free estimate · Response within hours</div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 <span>BP Landscaping LLC</span> · Licensed & Insured · All Rights Reserved</p>
+  <div class="footer-inner">
+    <div class="footer-logo">🌿 BP Landscaping LLC</div>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 <span>BP Landscaping LLC</span> · Licensed & Insured · All Rights Reserved</div>
 </footer>
 
 </body>
